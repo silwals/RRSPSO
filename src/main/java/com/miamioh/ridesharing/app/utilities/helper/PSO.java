@@ -30,6 +30,9 @@ public class PSO {
 				eEvent location = new eEvent();
 				location.x(e.getLatitude());
 				location.y(e.getLongitude());
+				//add if its pckup ordrop
+				location.setPickup(e.isPickup());
+				
 		        map.add(location);
 			}
 	    return;
@@ -115,6 +118,10 @@ public class PSO {
 		int temp = particles.get(index).data(cityA);
 		particles.get(index).data(cityA, particles.get(index).data(cityB));
 		particles.get(index).data(cityB, temp);
+		// add code here
+		Particle p=particles.get(index);
+		
+		
 		return;
 	}
 	//Fitness Function
@@ -321,11 +328,20 @@ public class PSO {
 	    }
     } // Particle
 	
-	private static class eEvent
+	private static class eEvent 
 	{
 		private double mX = 0;
 		private double mY = 0;
-	
+		private boolean isPickup;
+		
+		public boolean isPickup() {
+			return isPickup;
+		}
+
+		public void setPickup(boolean isPickup) {
+			this.isPickup = isPickup;
+		}
+
 		public double x()
 		{
 		    return mX;
