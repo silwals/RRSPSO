@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: DistributedRideSharing
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: silwals
+Implementation-Vendor-Id: com.miamioh
+Build-Jdk: 1.8.0_201
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/DistributedRideSharing
+Created-By: Maven Integration for Eclipse
+
