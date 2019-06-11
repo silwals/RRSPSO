@@ -30,7 +30,7 @@ public class PSO {
 				eEvent location = new eEvent();
 				location.x(e.getLatitude());
 				location.y(e.getLongitude());
-				//add if its pckup ordrop
+				//add if its pickup or drop
 				location.setPickup(e.isPickup());
 				
 		        map.add(location);
@@ -120,6 +120,9 @@ public class PSO {
 		particles.get(index).data(cityB, temp);
 		// add code here
 		Particle p=particles.get(index);
+		int[] pMdata=p.getData();
+		
+		
 		
 		
 		return;
@@ -304,6 +307,9 @@ public class PSO {
 	        this.mData[index] = value;
 	        return;
 	    }
+	    public int[] getData() {
+	    	return mData;
+	    }
 	
 	    public double pBest()
 	    {
@@ -328,7 +334,7 @@ public class PSO {
 	    }
     } // Particle
 	
-	private static class eEvent 
+	private static class eEvent extends Event
 	{
 		private double mX = 0;
 		private double mY = 0;

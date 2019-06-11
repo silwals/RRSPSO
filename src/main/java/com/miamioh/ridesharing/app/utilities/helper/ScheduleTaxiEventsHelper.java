@@ -75,6 +75,25 @@ public class ScheduleTaxiEventsHelper {
          			events.add(request.getPickUpEvent());
          			events.add(request.getDropOffEvent());
          	
+         //Map pick and drop points 
+         		/*	Map<String,List<Event>> dropToPickupMap = new HashMap<>();
+
+         			for (Event e : events) {
+         				if(e.isPickup())
+         				dropToPickupMap.getOrDefault(e, null);
+         				else {
+         					dropToPickupMap.getOrDefault(e, null);
+         				}
+         				for (Vertex vert : vertexList) {
+         					if (vert.getType().equals(VertexTypeEnum.PICKUP)) {
+         						p1 = vert;
+         					} else {
+         						d1 = vert;
+         					}
+         				}
+         				dropToPickupVertexMap.put(d1, p1);
+         			}*/
+         			
           // Before calling PSO initilaize the Map
          			PSO pso=new PSO(events.size());
          			pso.initializeMap(events);
