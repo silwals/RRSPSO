@@ -1,6 +1,7 @@
 package com.miamioh.ridesharing.app.utilities.helper;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -16,24 +17,28 @@ public class PSO {
 
 	private static ArrayList<Particle> particles = new ArrayList<Particle>();
 	
-	private static ArrayList<eEvent> map = new ArrayList<eEvent>();
+	//private static ArrayList<eEvent> map = new ArrayList<eEvent>();
+	private static ArrayList<Event> eventMap = new ArrayList<Event>();
+	private static Map<Event, Event> dropToPickupMapCopy;
 	private static int EVENT_COUNT;
 	public PSO(int size) {
 		System.out.println(" Inside PSO constructor");
 	    EVENT_COUNT=size;		
 	}
 
-	void initializeMap(Set<Event> events)
+	void initializeMap(Set<Event> events, Map<Event, Event> dropToPickupMap)
 	{
 	System.out.println(" Inside PSO initilaize Map");
+	dropToPickupMapCopy = dropToPickupMap;
 			for(Event e:events){
-				eEvent location = new eEvent();
+				eventMap.add(e); // saving the events to use it later
+			/*	eEvent location = new eEvent();
 				location.x(e.getLatitude());
 				location.y(e.getLongitude());
 				//add if its pickup or drop
 				location.setPickup(e.isPickup());
-				
-		        map.add(location);
+			
+		        map.add(location);*/
 			}
 	    return;
 	}
@@ -99,12 +104,13 @@ public class PSO {
 	        	randomlyArrange(particles.indexOf(newParticle));
 	        }
 	        getTotalDistance(particles.indexOf(newParticle));
-	    } // i
+	    } 
 	    return;
 	}
 	private static void randomlyArrange(final int index)
 	{
 		int cityA = new Random().nextInt(EVENT_COUNT);
+		System.out.println("cityA" +cityA);
 		int cityB = 0;
 		boolean done = false;
 		while(!done)
@@ -115,12 +121,35 @@ public class PSO {
 			}
 		}
 		
+		
 		int temp = particles.get(index).data(cityA);
 		particles.get(index).data(cityA, particles.get(index).data(cityB));
 		particles.get(index).data(cityB, temp);
-		// add code here
-		Particle p=particles.get(index);
-		int[] pMdata=p.getData();
+		
+		// Make sure the drop event does not occur before the pick event	
+		Particle particle=particles.get(index);
+		int[] tempMdata=particle.getMData();
+		
+		for(int i=0;i<tempMdata.length;i++) {
+			Event e1=eventMap.get(tempMdata[i]);
+			if(e1.isPickup()) {
+			       for(int j=i+1;j<tempMdata.length;j++) {
+                    
+			    	   Event e2=eventMap.get(tempMdata[j]);
+			    	   if(!e2.isPickup() && ) {
+			    		   
+			    	   }
+			       }
+			}
+		}
+		
+	/*	for(Integer ind:particle.getMData()) {
+			Event event=eventMap.get(ind);
+			if(event.isPickup()) {
+				dropToPickupMapCopy
+			}
+		}*/
+		
 		
 		
 		
@@ -147,15 +176,16 @@ public class PSO {
 	//Fetch this distance from HEREAPI
 	private static double getDistance(final int firstCity, final int secondCity)
 	{
-		eEvent cityA = null;
-		eEvent cityB = null;
+		Event cityA = null;
+		Event cityB = null;
 		double a2 = 0;
 		double b2 = 0;
-	    cityA = map.get(firstCity);
-	    cityB = map.get(secondCity);
-	    a2 = Math.pow(Math.abs(cityA.x() - cityB.x()), 2);
-	    b2 = Math.pow(Math.abs(cityA.y() - cityB.y()), 2);
-
+	    cityA = eventMap.get(firstCity);
+	    cityB = eventMap.get(secondCity);
+	   // a2 = Math.pow(Math.abs(cityA.x() - cityB.x()), 2);
+	   // b2 = Math.pow(Math.abs(cityA.y() - cityB.y()), 2);
+        a2= 10;
+        b2= 20;
 	    return Math.sqrt(a2 + b2);
 	}
 	private static void bubbleSort()
@@ -276,7 +306,7 @@ public class PSO {
 	
 	private static class Particle implements Comparable<Particle>
     {
-	    private int mData[] = new int[EVENT_COUNT];
+	    private int[] mData = new int[EVENT_COUNT]; // array keeps track of the index of the events
 	    private double mpBest = 0;
 	    private double mVelocity = 0.0;
 	
@@ -300,17 +330,16 @@ public class PSO {
 	    public int data(final int index)
 	    {
 	    	return this.mData[index];
-	    }
-	    
-	    public void data(final int index, final int value)
+	    }	    
+	    public void data(final int index, int value)
 	    {
 	        this.mData[index] = value;
 	        return;
 	    }
-	    public int[] getData() {
+	    public int[] getMData() {
 	    	return mData;
 	    }
-	
+
 	    public double pBest()
 	    {
 	    	return this.mpBest;
@@ -334,7 +363,7 @@ public class PSO {
 	    }
     } // Particle
 	
-	private static class eEvent extends Event
+/*	private static class eEvent extends Event
 	{
 		private double mX = 0;
 		private double mY = 0;
@@ -370,6 +399,6 @@ public class PSO {
 		    return;
 		}
 	} // eEvent
-
+*/
 }
 

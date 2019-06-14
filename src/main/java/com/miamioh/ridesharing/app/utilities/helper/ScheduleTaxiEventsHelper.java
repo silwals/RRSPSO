@@ -76,27 +76,28 @@ public class ScheduleTaxiEventsHelper {
          			events.add(request.getDropOffEvent());
          	
          //Map pick and drop points 
-         		/*	Map<String,List<Event>> dropToPickupMap = new HashMap<>();
-
+         			Map<Event,Event> dropToPickupMap = new HashMap<>();
+         			 Event pick= null;
+         			 Event drop=null;
          			for (Event e : events) {
-         				if(e.isPickup())
-         				dropToPickupMap.getOrDefault(e, null);
-         				else {
-         					dropToPickupMap.getOrDefault(e, null);
+         				if(e.isPickup()) {
+         					dropToPickupMap.put(e, dropToPickupMap.getOrDefault(e, null));
          				}
-         				for (Vertex vert : vertexList) {
-         					if (vert.getType().equals(VertexTypeEnum.PICKUP)) {
-         						p1 = vert;
-         					} else {
-         						d1 = vert;
+         			}
+         			for (Event e : events) {
+         				if(!e.isPickup()) {
+         					for(Event key:dropToPickupMap.keySet()) {
+         						if(e.getRequestId()==key.getRequestId()) {
+         							dropToPickupMap.replace(key,e);
+         						}
          					}
          				}
-         				dropToPickupVertexMap.put(d1, p1);
-         			}*/
+         			}
+         			log.info("Mapped pick an drop requests in the map dropToPickupMap: " + dropToPickupMap);
          			
           // Before calling PSO initilaize the Map
          			PSO pso=new PSO(events.size());
-         			pso.initializeMap(events);
+         			pso.initializeMap(events,dropToPickupMap);
           // PSO algorithm 
          		PSO.PSOAlgorithm(taxi,events);		
             
@@ -122,7 +123,10 @@ public class ScheduleTaxiEventsHelper {
 			 * response.setTaxiNumber(taxi.getTaxiNumber());
 			 * response.setTaxiModel(taxi.getModel());
 			 * response.setAvailableSeats(AppConstants.TAXI_MAX_CAPACITY -
-			 * taxi.getNoOfPassenger().get()); response.setPickTimeInMinutes((new
+			 * taxi.getNoOfPassenger().get()); response.else{
+         					
+         					dropToPickupMap.getOrDefault(e, null);
+         				}setPickTimeInMinutes((new
 			 * Double(distanceAndTime[1])).longValue()); log.info("Request ID: " +
 			 * request.getRequestID() + " Taxi Id: " + taxi.getTaxiId() +
 			 * " PickTimeInMinutes: " + response.getPickTimeInMinutes()); //Fetch the
