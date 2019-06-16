@@ -96,10 +96,10 @@ public class ScheduleTaxiEventsHelper {
          			log.info("Mapped pick an drop requests in the map dropToPickupMap: " + dropToPickupMap);
          			
           // Before calling PSO initilaize the Map
-         			PSO pso=new PSO(events.size());
-         			pso.initializeMap(events,dropToPickupMap);
+         			PSO pso=new PSO( new ArrayList(events));
+         	//temp 		pso.initializeMap(events,dropToPickupMap);
           // PSO algorithm 
-         		PSO.PSOAlgorithm(taxi,events);		
+         			//temp 	PSO.PSOAlgorithm(taxi,events);		
             
          	//create response
          		TaxiResponse response = createResponse(request, taxi);
