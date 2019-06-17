@@ -10,6 +10,7 @@ public class Event {
 	private Date eventTime;
 	private long tolerance;
 	private boolean isPickup;
+	private boolean isCompleted; // added after PSO changes
 	private int index;
 	private Date timeOfOccurance;
 	public String getRequestId() {
@@ -59,6 +60,12 @@ public class Event {
 	}
 	public void setTimeOfOccurance(Date timeOfOccurance) {
 		this.timeOfOccurance = timeOfOccurance;
+	}
+	public boolean isCompleted() {
+		return isCompleted;
+	}
+	public void setCompleted(boolean isCompleted) {
+		this.isCompleted = isCompleted;
 	}
 	
 }

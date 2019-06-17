@@ -12,8 +12,6 @@ public class TaxiResponse implements Serializable {
 	private String responseId;
 	private String requestId;
 	private String taxiId;
-	private String taxiNumber;
-	private String taxiModel;
 	private int availableSeats;
 	private int pickUpIndex;
 	private int dropIndex;
@@ -38,18 +36,6 @@ public class TaxiResponse implements Serializable {
 	}
 	public void setTaxiId(String taxiId) {
 		this.taxiId = taxiId;
-	}
-	public String getTaxiNumber() {
-		return taxiNumber;
-	}
-	public void setTaxiNumber(String taxiNumber) {
-		this.taxiNumber = taxiNumber;
-	}
-	public String getTaxiModel() {
-		return taxiModel;
-	}
-	public void setTaxiModel(String taxiModel) {
-		this.taxiModel = taxiModel;
 	}
 	public int getAvailableSeats() {
 		return availableSeats;

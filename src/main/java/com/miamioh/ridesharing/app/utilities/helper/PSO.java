@@ -29,12 +29,11 @@ public class PSO {
 	private static int noOfNodes;
 
 	public PSO(List<Event> eventsPassed) {
-		log.info("Inside PSO constructor ");
+		log.info("Inside PSO constructor :"+eventsPassed );
 		events = eventsPassed;
 		noOfNodes = events.size();
 	}
 
-	// void initializeMap(Set<Event> events, Map<Event, Event> dropToPickupMap)
 	void initializeMap() {
 		Map<String, List<Event>> requestEventMap = new HashMap<>();
 		for (Event event : events) {
@@ -64,9 +63,8 @@ public class PSO {
 		return;
 	}
 
-	// static void PSOAlgorithm(Taxi taxi, Set<Event> events)
 	 void PSOAlgorithm() {
-		log.info("Inside PSOAlgorithm");
+		log.info("Inside PSOAlgorithm : Begin executing PSO");
 		Particle aParticle = null;
 		int epoch = 0;
 		boolean done = false;
@@ -389,7 +387,7 @@ public class PSO {
 		}
 	} // Particle
 
-	public static void main(String[] args) {
+	public static void main_1(String[] args) {
 		List<Event> events = new ArrayList<>();
 	/*	Event ev1 = new Event();
 		ev1.setRequestId(UUID.randomUUID().toString());
@@ -517,6 +515,18 @@ public class PSO {
 			System.out.println(node.getRequestId() +":"+node.isPickup());
 		}
 		return;
+	}
+	public List<Event> start() {
+		initializeMap();
+		PSOAlgorithm();
+		Particle printBestSolution = printBestSolution();
+		List<Event> psoNodes = new ArrayList<>();
+		for(int i : printBestSolution.getmData()) {
+			Event node = events.get(i);
+			psoNodes.add(node);
+		}
+		System.out.println(psoNodes);
+		return psoNodes;
 	}
 
 }

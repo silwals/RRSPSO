@@ -68,10 +68,11 @@ public class TaxiUtility {
 		log.info("RequestId: "+request.getRequestID()+" List of near by Taxis fetched: "+nearByTaxiList);
 		for(Taxi taxi: nearByTaxiList) {
 			//taxi.addEventSchedule(request);
-			/* before scheduling events, check if taxi has available space*/
-			// taxi is not full and can add more requests
+			/* before scheduling events, check if taxi has available space
+			 * process only if taxi has capacity to add more requests
+			 */
 			if(taxi.getNoOfPassenger().get()<= AppConstants.TAXI_MAX_CAPACITY && request.getSeatsNeeded()< (AppConstants.TAXI_MAX_CAPACITY -taxi.getNoOfPassenger().get()))				
-			CompletableFuture.runAsync(() -> scheduleTaxiEventsHelper.scheduleEvents(taxi, request));
+			CompletableFuture.runAsync(() -> scheduleTaxiEventsHelper.findPSO(taxi, request));
 		}
 	}
 	
