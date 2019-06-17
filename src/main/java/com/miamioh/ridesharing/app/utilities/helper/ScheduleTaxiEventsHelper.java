@@ -57,11 +57,11 @@ public class ScheduleTaxiEventsHelper {
 		TaxiResponse response =null;
 		//Handle the edge case
 		if (taxi.getNoOfPassenger().get() == 0 || events.size()==0) {
+			log.info("No of passengers : "+taxi.getNoOfPassenger().get()+ " PSO is not called");
 			// taxi is empty and it can take in the new request
 			List<Event> singleRequest=new ArrayList<>();
 			singleRequest.add(0, request.getPickUpEvent());
 			singleRequest.add(1,request.getDropOffEvent());
-			log.info("Request ID: "+request.getRequestID()+ "PSO is not called");
 			response = createResponseObject(request, taxi);
 			Event taxiNode = new Event();
 			taxiNode.setLatitude(taxi.getLatitude());
@@ -81,10 +81,11 @@ public class ScheduleTaxiEventsHelper {
 			log.info("Request ID: "+request.getRequestID()+" Taxi Id: "+taxi.getTaxiId()+" totalCost: "+response.getCost());
 			
 			request.getDropOffEvent().setIndex(1);
-			response.setPickUpIndex(1);
+			response.setDropIndex(1);
 			response.setTimeToDestinationInMinutes(calculateTime(distance));			
 			
 		}else {
+			log.info("No of passengers : "+taxi.getNoOfPassenger().get()+ "PSO is called");
 			/*
 			 * If taxi is not empty and has scheduled events in it's list
 			 */

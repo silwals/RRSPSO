@@ -71,8 +71,11 @@ public class TaxiUtility {
 			/* before scheduling events, check if taxi has available space
 			 * process only if taxi has capacity to add more requests
 			 */
-			if(taxi.getNoOfPassenger().get()<= AppConstants.TAXI_MAX_CAPACITY && request.getSeatsNeeded()< (AppConstants.TAXI_MAX_CAPACITY -taxi.getNoOfPassenger().get()))				
+			if(taxi.getNoOfPassenger().get()<= AppConstants.TAXI_MAX_CAPACITY && request.getSeatsNeeded()< (AppConstants.TAXI_MAX_CAPACITY -taxi.getNoOfPassenger().get())) {				
 			CompletableFuture.runAsync(() -> scheduleTaxiEventsHelper.findPSO(taxi, request));
+			}else {
+				log.info("TaxiId: "+taxi.getTaxiId() +" does not have capacity.");	
+			}
 		}
 	}
 	

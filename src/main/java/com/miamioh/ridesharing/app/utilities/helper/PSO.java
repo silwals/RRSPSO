@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.miamioh.ridesharing.app.constants.AppConstants;
 import com.miamioh.ridesharing.app.entity.Event;
 
 public class PSO {
@@ -189,17 +190,15 @@ public class PSO {
 	/**
      * Calculate distance and time between two points(given in latitude and longitude) 
      *
-     * @returns Distance in Meters
+     * @returns Distance in Meters using HereAPI
      */
-    public static double[] distanceAndTime(double lat1, double lat2, double lon1,
+    public static void distance(double lat1, double lat2, double lon1,
 			double lon2) {
-		log.info("Inside distance caluclator using HEREAPI ");
-		double[] distanceAndTime = new double[2];
-		String app_id = "4UCBn5UnDkcgKgY3gDNY";
-		String app_code = "AuD0dBhxA6RTFPytkdYvhQ";
-		String uri = "https://route.api.here.com/routing/7.2/calculateroute.json" + "?app_id=" + app_id + "&app_code="
-				+ app_code + "&waypoint0=geo!" + lat1 + "," + lon1 + // 41.91,-87.63" +
-				"&waypoint1=geo!" + lat2 + "," + lon2 + // 41.61,-87.62" +
+		log.info("Inside distance calculator using HEREAPI ");
+		double distance=0.0;
+		String uri = AppConstants.URI+ "?app_id=" + AppConstants.APP_ID + "&app_code="
+				+ AppConstants.APP_CODE + "&waypoint0=geo!" + lat1 + "," + lon1 + 
+				"&waypoint1=geo!" + lat2 + "," + lon2 +
 				"&mode=fastest;car;traffic:disabled";
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -220,13 +219,11 @@ public class PSO {
 			System.out.println(map.keySet());
 			System.out.println("keys" + map.keySet());
 			System.out.println("values" + map.values().toString());
-			//distanceAndTime[0]=;
-			//distanceAndTime[1]=;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-        return distanceAndTime; 
+		return;
+       // return distanceAndTime; 
 
     }
 	
@@ -517,6 +514,7 @@ public class PSO {
 		return;
 	}
 	public List<Event> start() {
+		log.info("Inside PSO start() method ");
 		initializeMap();
 		PSOAlgorithm();
 		Particle printBestSolution = printBestSolution();

@@ -115,8 +115,7 @@ public class TaxiResponseController {
 			 if(findById.isPresent()) {
 				 ack.setAckStatus(true);
 				 ack.setTaxi(taxiUtility.getTaxiInstance(rideSharingConfirmation.getTaxiId()));
-				 //ack.setMessage("Booking Confirmed"); Changing the words into better one
-				 ack.setMessage("Booking Acknowledged");
+				 ack.setMessage("Booking Confirmed"); 
 			 }else {
 				 ack.setAckStatus(false);
 				 ack.setMessage("Timed Out");
