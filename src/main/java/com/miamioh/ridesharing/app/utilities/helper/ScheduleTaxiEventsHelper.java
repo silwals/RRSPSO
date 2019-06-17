@@ -27,6 +27,7 @@ import com.miamioh.ridesharing.app.data.repository.TempScheduledEventListReposit
 import com.miamioh.ridesharing.app.entity.Event;
 import com.miamioh.ridesharing.app.entity.Taxi;
 import com.miamioh.ridesharing.app.request.RideSharingRequest;
+import com.miamioh.ridesharing.app.utilities.helper.PSO.Particle;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -55,9 +56,6 @@ public class ScheduleTaxiEventsHelper {
 	
 	public void scheduleEvents(Taxi taxi, RideSharingRequest request) {
 		log.info("Inside Taxi Scheduler Utility RequestId: " + request.getRequestID());
-		/*if (taxi.getNoOfPassenger().get() == AppConstants.TAXI_MAX_CAPACITY) {
-			// taxi is full cannot add more requests
-		} else */ //already handled
 		if (taxi.getNoOfPassenger().get() == 0) {
 			// taxi is empty and it can take in the new request
 			Set<Event> events = zSetOperations.range(taxi.getTaxiId(), 0, -1);
@@ -65,7 +63,7 @@ public class ScheduleTaxiEventsHelper {
 			events.add(request.getDropOffEvent());
 
 		} else {
-			// taxi already has schedule rides in it's event list
+			// taxi already has schedule rides in it's event list but still has capacity 
             Event pickup =request.getPickUpEvent();
             Event dropoff=request.getDropOffEvent();
             
@@ -74,34 +72,25 @@ public class ScheduleTaxiEventsHelper {
          			Set<Event> events = zSetOperations.range(taxi.getTaxiId(), 0, -1);
          			events.add(request.getPickUpEvent());
          			events.add(request.getDropOffEvent());
-         	
-         //Map pick and drop points 
-         			Map<Event,Event> dropToPickupMap = new HashMap<>();
-         			 Event pick= null;
-         			 Event drop=null;
-         			for (Event e : events) {
-         				if(e.isPickup()) {
-         					dropToPickupMap.put(e, dropToPickupMap.getOrDefault(e, null));
-         				}
-         			}
-         			for (Event e : events) {
-         				if(!e.isPickup()) {
-         					for(Event key:dropToPickupMap.keySet()) {
-         						if(e.getRequestId()==key.getRequestId()) {
-         							dropToPickupMap.replace(key,e);
-         						}
-         					}
-         				}
-         			}
-         			log.info("Mapped pick an drop requests in the map dropToPickupMap: " + dropToPickupMap);
+         			log.info("Before calling PSO from Schedule Events Class, events size is: "+ events.size() );
          			
           // Before calling PSO initilaize the Map
          			PSO pso=new PSO( new ArrayList(events));
-         	//temp 		pso.initializeMap(events,dropToPickupMap);
+         	        pso.initializeMap();
           // PSO algorithm 
-         			//temp 	PSO.PSOAlgorithm(taxi,events);		
+         	        pso.PSOAlgorithm();	
+         			Particle printBestSolution = pso.printBestSolution();
+         			List<Event> psoNodes = new ArrayList<>();
+         			log.info("Final Event Schedule after PSO");
+         			for (int i : printBestSolution.getmData()) {
+         				Event node = pso.events.get(i);
+         				psoNodes.add(node);
+         				System.out.println(node.getRequestId() +":"+node.isPickup());
+         			}
             
          	//create response
+         		log.info("Response needs the time to pick the request from the taxi");
+         		
          		TaxiResponse response = createResponse(request, taxi);
          		log.info("Taxi Response Computed: " + response);
          	// Save the response
@@ -110,48 +99,7 @@ public class ScheduleTaxiEventsHelper {
     			saveEventsInTempScheduledEventList(request, response.getResponseId(), taxi.getTaxiId());
             
 
-            //fetch time and distance from taxi to the pickup 
-    		//&&&&&&&&&&&comment From here
-           // double[] distanceAndTime = distanceAndTime(pickup.getLatitude(), dropoff.getLatitude(), pickup.getLongitude(),
-           // 		dropoff.getLongitude());
-        	
-			/*
-			 * TaxiResponse response = new TaxiResponse(); String responseId =
-			 * UUID.randomUUID().toString(); response.setResponseId(responseId);
-			 * response.setRequestId(request.getRequestID());
-			 * response.setTaxiId(taxi.getTaxiId());
-			 * response.setTaxiNumber(taxi.getTaxiNumber());
-			 * response.setTaxiModel(taxi.getModel());
-			 * response.setAvailableSeats(AppConstants.TAXI_MAX_CAPACITY -
-			 * taxi.getNoOfPassenger().get()); response.else{
-         					
-         					dropToPickupMap.getOrDefault(e, null);
-         				}setPickTimeInMinutes((new
-			 * Double(distanceAndTime[1])).longValue()); log.info("Request ID: " +
-			 * request.getRequestID() + " Taxi Id: " + taxi.getTaxiId() +
-			 * " PickTimeInMinutes: " + response.getPickTimeInMinutes()); //Fetch the
-			 * double[] distanceAndTime = distanceAndTime(pickup.getLatitude(),
-			 * dropoff.getLatitude(), pickup.getLongitude(), dropoff.getLongitude());
-			 * 
-			 * // request.getPickUpEvent().setIndex(overallPickIndex); //
-			 * response.setPickUpIndex(pickUpindex);
-			 * response.setPickTimeInMinutes(calculateTime(totalWeightInMst));
-			 * log.info("Request ID: " + request.getRequestID() + " Taxi Id: " +
-			 * taxi.getTaxiId() + " PickTimeInMinutes: " + response.getPickTimeInMinutes());
-			 * log.info("Request ID: " + request.getRequestID() + " Taxi Id: " +
-			 * taxi.getTaxiId() + " distance: " + distance);
-			 * 
-			 * response.setDistanceInKms(distance / 1000.0);
-			 * response.setCost(calculateCost(distance)); log.info("Request ID: " +
-			 * request.getRequestID() + " Taxi Id: " + taxi.getTaxiId() + " totalCost: " +
-			 * response.getCost());
-			 * 
-			 * int overallDropIndex = 0;
-			 * response.setTimeToDestinationInMinutes(calculateTime(totalWeightToDestInMst))
-			 * ; log.info("Taxi Response Computed: " + response);
-			 * taxiResponseDao.save(response); saveEventsInTempScheduledEventList(request,
-			 * responseId, taxi.getTaxiId());
-			 */
+           
 		}
 
 		}
@@ -291,8 +239,6 @@ public class ScheduleTaxiEventsHelper {
 		response.setResponseId(responseId);
 		response.setRequestId(request.getRequestID());
 		response.setTaxiId(taxi.getTaxiId());
-		//response.setTaxiNumber(taxi.getTaxiNumber());  Not required 
-		//response.setTaxiModel(taxi.getModel());
 		response.setAvailableSeats(AppConstants.TAXI_MAX_CAPACITY - taxi.getNoOfPassenger().get()); // increment no Of
 																									// passenger in each																								// taxi confirmation
 		return response;

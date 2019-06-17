@@ -8,19 +8,22 @@ import java.util.Random;
 import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.miamioh.ridesharing.app.entity.Event;
 
 public class PSO {
 	private static final Logger log = LoggerFactory.getLogger(ScheduleTaxiEventsHelper.class);
-	private static final int PARTICLE_COUNT = 1000;
+	private static final int PARTICLE_COUNT = 100;
 	private static final int V_MAX = 4; // Maximum velocity change allowed.
 										// Range: 0 >= V_MAX < EVENT_COUNT
 
-	private static final int MAX_EPOCHS = 1000;
+	private static final int MAX_EPOCHS = 100;
 	private static List<Particle> particles = new ArrayList<Particle>();
 
-	private static List<Event> events = new ArrayList<Event>();
+	public static List<Event> events = new ArrayList<Event>();
 	private static Map<Event, Event> dropToPickupVertexMap = new HashMap<>();
 
 	private static int noOfNodes;
@@ -62,7 +65,7 @@ public class PSO {
 	}
 
 	// static void PSOAlgorithm(Taxi taxi, Set<Event> events)
-	static void PSOAlgorithm() {
+	 void PSOAlgorithm() {
 		log.info("Inside PSOAlgorithm");
 		Particle aParticle = null;
 		int epoch = 0;
@@ -183,7 +186,58 @@ public class PSO {
 
 		return distance;
 	}
+	
+	
+	/**
+     * Calculate distance and time between two points(given in latitude and longitude) 
+     *
+     * @returns Distance in Meters
+     */
+    public static double[] distanceAndTime(double lat1, double lat2, double lon1,
+			double lon2) {
+		log.info("Inside distance caluclator using HEREAPI ");
+		double[] distanceAndTime = new double[2];
+		String app_id = "4UCBn5UnDkcgKgY3gDNY";
+		String app_code = "AuD0dBhxA6RTFPytkdYvhQ";
+		String uri = "https://route.api.here.com/routing/7.2/calculateroute.json" + "?app_id=" + app_id + "&app_code="
+				+ app_code + "&waypoint0=geo!" + lat1 + "," + lon1 + // 41.91,-87.63" +
+				"&waypoint1=geo!" + lat2 + "," + lon2 + // 41.61,-87.62" +
+				"&mode=fastest;car;traffic:disabled";
 
+		RestTemplate restTemplate = new RestTemplate();
+		try {
+			String result = restTemplate.getForObject(uri, String.class);
+			log.info("Output from Server .... \n" + result);
+			String newVal = "{\"" + result.substring(result.lastIndexOf("summary"));
+			System.out.println(newVal);
+			int index = newVal.lastIndexOf("language") - 3;
+			System.out.println(index);
+			newVal = newVal.substring(0, index);
+			System.out.println(newVal);
+			final ObjectMapper mapper = new ObjectMapper();
+
+			Map<String, Object> map = new HashMap<String, Object>();
+			map = mapper.readValue(newVal, new TypeReference<HashMap<String, Object>>() {
+			});
+			System.out.println(map.keySet());
+			System.out.println("keys" + map.keySet());
+			System.out.println("values" + map.values().toString());
+			//distanceAndTime[0]=;
+			//distanceAndTime[1]=;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+        return distanceAndTime; 
+
+    }
+	
+
+	/*
+	 * Calculates Haversine Distance ** @returns response in metres
+	 * 
+	 */
+	
 	public static double distance(double lat1, double lat2, double lon1, double lon2, double el1, double el2) {
 
 		final int R = 6371; // Radius of the earth
@@ -264,7 +318,7 @@ public class PSO {
 		return;
 	}
 
-	private Particle printBestSolution() {
+	public Particle printBestSolution() {
 		/*
 		 * if(particles.get(0).pBest() <= TARGET){ // Print it.
 		 * System.out.println("Target reached."); }else{
@@ -279,7 +333,7 @@ public class PSO {
 		return particles.get(0);
 	}
 	
-	private static class Particle implements Comparable<Particle> {
+	public static class Particle implements Comparable<Particle> {
 		private int mData[] = new int[noOfNodes];
 		private double mpBest = 0;
 		private double mVelocity = 0.0;
