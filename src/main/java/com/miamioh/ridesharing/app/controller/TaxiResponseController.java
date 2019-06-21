@@ -96,7 +96,9 @@ public class TaxiResponseController {
 	@PostMapping(value = "/RideSharing/RideConfirmation", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public RideSharingConfirmationAck confirmRide(@RequestBody RideSharingConfirmation rideSharingConfirmation) {
-		
+		// What is happening here?? Permanent Queue??
+		// Once the permanent queue is set , we need to find the success rate of mapping request and taxi
+		// if it maps more >1 requests to single taxi then more successful
 		RideSharingConfirmationAck ack = new RideSharingConfirmationAck();
 		ack.setResponseId(rideSharingConfirmation.getResponseId());
 		Taxi taxi = taxiUtility.getTaxiInstance(rideSharingConfirmation.getTaxiId());

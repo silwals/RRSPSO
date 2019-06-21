@@ -1,5 +1,1412 @@
-2019-06-18 17:40:26.000  INFO 15797 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
-2019-06-18 17:40:26.000  INFO 15797 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
-2019-06-18 17:40:26.182  INFO 15797 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] essageListenerContainer$ListenerConsumer : Consumer stopped
-2019-06-18 17:40:26.190  INFO 15797 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] essageListenerContainer$ListenerConsumer : Consumer stopped
-2019-06-18 17:40:26.197  INFO 15797 --- [Thread-87] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-06-21 16:31:48.226  INFO 13756 --- [restartedMain] .m.r.a.DistributedRideSharingApplication : Starting DistributedRideSharingApplication on cec-ben214-03 with PID 13756 (/home/silwals/Documents/code/DistributedRideSharing/target/classes started by silwals in /home/silwals/Documents/code/DistributedRideSharing)
+2019-06-21 16:31:48.233  INFO 13756 --- [restartedMain] .m.r.a.DistributedRideSharingApplication : No active profile set, falling back to default profiles: default
+2019-06-21 16:31:48.277  INFO 13756 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-06-21 16:31:48.278  INFO 13756 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-06-21 16:31:48.791  INFO 13756 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-06-21 16:31:48.792  INFO 13756 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-21 16:31:48.915  INFO 13756 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 111ms. Found 2 repository interfaces.
+2019-06-21 16:31:49.398  INFO 13756 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.kafka.annotation.KafkaBootstrapConfiguration' of type [org.springframework.kafka.annotation.KafkaBootstrapConfiguration$$EnhancerBySpringCGLIB$$d95e708d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-21 16:31:49.800  INFO 13756 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8000 (http)
+2019-06-21 16:31:49.865  INFO 13756 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-06-21 16:31:49.866  INFO 13756 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-06-21 16:31:49.880  INFO 13756 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+2019-06-21 16:31:49.959  INFO 13756 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-06-21 16:31:49.960  INFO 13756 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1682 ms
+2019-06-21 16:31:50.230  INFO 13756 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-06-21 16:31:50.435  INFO 13756 --- [restartedMain] c.m.r.a.c.p.KafkaConsumerConfigParams    : Bootstrap servers for the kafka consumer app are:localhost:9092
+2019-06-21 16:31:50.435  INFO 13756 --- [restartedMain] c.m.r.a.c.p.KafkaConsumerConfigParams    : AutoOffset Reset Config for the kafka consumer app is:earliest
+2019-06-21 16:31:50.435  INFO 13756 --- [restartedMain] c.m.r.a.c.p.KafkaConsumerConfigParams    : clientId for the kafka consumer app is:taxi-region-21
+2019-06-21 16:31:50.557  INFO 13756 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-21 16:31:50.959  INFO 13756 --- [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = taxi-region-21
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2019-06-21 16:31:51.014  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version : 2.0.1
+2019-06-21 16:31:51.014  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId : fa14705e51bd2ce5
+2019-06-21 16:31:51.118  INFO 13756 --- [restartedMain] org.apache.kafka.clients.Metadata        : Cluster ID: tCkSJUjmSl2fVIBEg1JoMg
+2019-06-21 16:31:51.145  INFO 13756 --- [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = taxi-region-21
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2019-06-21 16:31:51.151  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version : 2.0.1
+2019-06-21 16:31:51.152  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId : fa14705e51bd2ce5
+2019-06-21 16:31:51.155  INFO 13756 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
+2019-06-21 16:31:51.160  INFO 13756 --- [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = taxi-region-21
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2019-06-21 16:31:51.167  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version : 2.0.1
+2019-06-21 16:31:51.167  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId : fa14705e51bd2ce5
+2019-06-21 16:31:51.169  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.Metadata        : Cluster ID: tCkSJUjmSl2fVIBEg1JoMg
+2019-06-21 16:31:51.175  INFO 13756 --- [restartedMain] org.apache.kafka.clients.Metadata        : Cluster ID: tCkSJUjmSl2fVIBEg1JoMg
+2019-06-21 16:31:51.179  INFO 13756 --- [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = taxi-region-21
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2019-06-21 16:31:51.185  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version : 2.0.1
+2019-06-21 16:31:51.185  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId : fa14705e51bd2ce5
+2019-06-21 16:31:51.185  INFO 13756 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
+2019-06-21 16:31:51.193  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] org.apache.kafka.clients.Metadata        : Cluster ID: tCkSJUjmSl2fVIBEg1JoMg
+2019-06-21 16:31:51.231  INFO 13756 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8000 (http) with context path ''
+2019-06-21 16:31:51.233  INFO 13756 --- [restartedMain] .m.r.a.DistributedRideSharingApplication : Started DistributedRideSharingApplication in 3.291 seconds (JVM running for 3.656)
+2019-06-21 16:31:54.408  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-4, groupId=taxi-region-21] Discovered group coordinator cec-ben214-03:9092 (id: 2147483647 rack: null)
+2019-06-21 16:31:54.411  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-4, groupId=taxi-region-21] Revoking previously assigned partitions []
+2019-06-21 16:31:54.411  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions revoked: []
+2019-06-21 16:31:54.411  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-4, groupId=taxi-region-21] (Re-)joining group
+2019-06-21 16:31:54.442  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-2, groupId=taxi-region-21] Discovered group coordinator cec-ben214-03:9092 (id: 2147483647 rack: null)
+2019-06-21 16:31:54.443  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-2, groupId=taxi-region-21] Revoking previously assigned partitions []
+2019-06-21 16:31:54.443  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions revoked: []
+2019-06-21 16:31:54.443  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-2, groupId=taxi-region-21] (Re-)joining group
+2019-06-21 16:31:54.457  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-4, groupId=taxi-region-21] (Re-)joining group
+2019-06-21 16:31:54.543  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-2, groupId=taxi-region-21] Successfully joined group with generation 2
+2019-06-21 16:31:54.543  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-4, groupId=taxi-region-21] Successfully joined group with generation 2
+2019-06-21 16:31:54.545  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-4, groupId=taxi-region-21] Setting newly assigned partitions [ride-sharing-requests-5-0]
+2019-06-21 16:31:54.545  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-2, groupId=taxi-region-21] Setting newly assigned partitions [register-taxi-request-9-0]
+2019-06-21 16:31:54.565  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.consumer.internals.Fetcher       : [Consumer clientId=consumer-2, groupId=taxi-region-21] Resetting offset for partition register-taxi-request-9-0 to offset 0.
+2019-06-21 16:31:54.567  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.consumer.internals.Fetcher       : [Consumer clientId=consumer-4, groupId=taxi-region-21] Resetting offset for partition ride-sharing-requests-5-0 to offset 0.
+2019-06-21 16:31:54.584  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions assigned: [register-taxi-request-9-0]
+2019-06-21 16:31:54.584  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions assigned: [ride-sharing-requests-5-0]
+2019-06-21 16:36:21.251  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.m.r.a.k.c.RideSharingRequestConsumer   : Recieved Register Taxi Request: com.miamioh.ridesharing.app.entity.Taxi@43e884e7
+2019-06-21 16:36:21.251  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : Registering Taxi with taxiId: ea28af9f-0cc5-4165-abb1-74398af0b24a
+2019-06-21 16:42:20.508  INFO 13756 --- [http-nio-8000-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-06-21 16:42:20.508  INFO 13756 --- [http-nio-8000-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-06-21 16:42:20.516  INFO 13756 --- [http-nio-8000-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2019-06-21 16:42:20.539  INFO 13756 --- [http-nio-8000-exec-1] c.m.r.a.c.TaxiResponseController         : Total number of Taxis: 1
+2019-06-21 16:43:43.192  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.a.k.c.RideSharingRequestConsumer   : Recieved Ride Sharing Request: com.miamioh.ridesharing.app.request.RideSharingRequest@c94324
+2019-06-21 16:43:43.207  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: d616e615-fb30-492c-844f-160bd350ac60 Total Number of near by Taxis fetched: 1
+2019-06-21 16:43:43.207  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: d616e615-fb30-492c-844f-160bd350ac60 List of near by Taxis fetched: [com.miamioh.ridesharing.app.entity.Taxi@43e884e7]
+2019-06-21 16:43:43.208  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.a.k.c.RideSharingRequestConsumer   : Recieved Ride Sharing Request: com.miamioh.ridesharing.app.request.RideSharingRequest@7f2a3d1e
+2019-06-21 16:43:43.209  INFO 13756 --- [ForkJoinPool.commonPool-worker-1] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Inside PSO Taxi Scheduler Utility RequestId: d616e615-fb30-492c-844f-160bd350ac60
+2019-06-21 16:43:43.209  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: d425731e-1774-463d-96a0-299b5cb44609 Total Number of near by Taxis fetched: 1
+2019-06-21 16:43:43.209  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: d425731e-1774-463d-96a0-299b5cb44609 List of near by Taxis fetched: [com.miamioh.ridesharing.app.entity.Taxi@43e884e7]
+2019-06-21 16:43:43.209  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.a.k.c.RideSharingRequestConsumer   : Recieved Ride Sharing Request: com.miamioh.ridesharing.app.request.RideSharingRequest@1bbae6a1
+2019-06-21 16:43:43.209  INFO 13756 --- [ForkJoinPool.commonPool-worker-2] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Inside PSO Taxi Scheduler Utility RequestId: d425731e-1774-463d-96a0-299b5cb44609
+2019-06-21 16:43:43.210  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: 3e4aa323-3286-4be3-aaa6-c9c9f30c8d82 Total Number of near by Taxis fetched: 1
+2019-06-21 16:43:43.210  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: 3e4aa323-3286-4be3-aaa6-c9c9f30c8d82 List of near by Taxis fetched: [com.miamioh.ridesharing.app.entity.Taxi@43e884e7]
+2019-06-21 16:43:43.211  INFO 13756 --- [ForkJoinPool.commonPool-worker-3] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Inside PSO Taxi Scheduler Utility RequestId: 3e4aa323-3286-4be3-aaa6-c9c9f30c8d82
+2019-06-21 16:43:43.211  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.a.k.c.RideSharingRequestConsumer   : Recieved Ride Sharing Request: com.miamioh.ridesharing.app.request.RideSharingRequest@2bc79238
+2019-06-21 16:43:43.212  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: a1c59b43-e181-4306-916c-28b0968b4f2f Total Number of near by Taxis fetched: 1
+2019-06-21 16:43:43.212  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: a1c59b43-e181-4306-916c-28b0968b4f2f List of near by Taxis fetched: [com.miamioh.ridesharing.app.entity.Taxi@43e884e7]
+2019-06-21 16:43:43.213  INFO 13756 --- [ForkJoinPool.commonPool-worker-1] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : No of passengers : 0 PSO is not called
+2019-06-21 16:43:43.214  INFO 13756 --- [ForkJoinPool.commonPool-worker-1] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Creating response for Request ID: d616e615-fb30-492c-844f-160bd350ac60
+2019-06-21 16:43:43.215  INFO 13756 --- [ForkJoinPool.commonPool-worker-3] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : No of passengers : 0 PSO is not called
+2019-06-21 16:43:43.215  INFO 13756 --- [ForkJoinPool.commonPool-worker-2] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : No of passengers : 0 PSO is not called
+2019-06-21 16:43:43.215  INFO 13756 --- [ForkJoinPool.commonPool-worker-1] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : calculateTime: 2.0683551562461102E-8
+2019-06-21 16:43:43.215  INFO 13756 --- [ForkJoinPool.commonPool-worker-4] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Inside PSO Taxi Scheduler Utility RequestId: a1c59b43-e181-4306-916c-28b0968b4f2f
+2019-06-21 16:43:43.215  INFO 13756 --- [ForkJoinPool.commonPool-worker-3] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Creating response for Request ID: 3e4aa323-3286-4be3-aaa6-c9c9f30c8d82
+2019-06-21 16:43:43.215  INFO 13756 --- [ForkJoinPool.commonPool-worker-2] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Creating response for Request ID: d425731e-1774-463d-96a0-299b5cb44609
+2019-06-21 16:43:43.215  INFO 13756 --- [ForkJoinPool.commonPool-worker-1] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Request ID: d616e615-fb30-492c-844f-160bd350ac60 Taxi Id: ea28af9f-0cc5-4165-abb1-74398af0b24a PickTimeInMinutes: 0
+2019-06-21 16:43:43.215  INFO 13756 --- [ForkJoinPool.commonPool-worker-2] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : calculateTime: 4.1367132518035284E-8
+2019-06-21 16:43:43.215  INFO 13756 --- [ForkJoinPool.commonPool-worker-3] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : calculateTime: 6.205068408049638E-8
+2019-06-21 16:43:43.215  INFO 13756 --- [ForkJoinPool.commonPool-worker-1] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Request ID: d616e615-fb30-492c-844f-160bd350ac60 Taxi Id: ea28af9f-0cc5-4165-abb1-74398af0b24a distance: 3983.025358058728
+2019-06-21 16:43:43.215  INFO 13756 --- [ForkJoinPool.commonPool-worker-2] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Request ID: d425731e-1774-463d-96a0-299b5cb44609 Taxi Id: ea28af9f-0cc5-4165-abb1-74398af0b24a PickTimeInMinutes: 0
+2019-06-21 16:43:43.215  INFO 13756 --- [ForkJoinPool.commonPool-worker-4] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : No of passengers : 0 PSO is not called
+2019-06-21 16:43:43.215  INFO 13756 --- [ForkJoinPool.commonPool-worker-3] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Request ID: 3e4aa323-3286-4be3-aaa6-c9c9f30c8d82 Taxi Id: ea28af9f-0cc5-4165-abb1-74398af0b24a PickTimeInMinutes: 0
+2019-06-21 16:43:43.215  INFO 13756 --- [ForkJoinPool.commonPool-worker-2] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Request ID: d425731e-1774-463d-96a0-299b5cb44609 Taxi Id: ea28af9f-0cc5-4165-abb1-74398af0b24a distance: 3983.02712811351
+2019-06-21 16:43:43.215  INFO 13756 --- [ForkJoinPool.commonPool-worker-4] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Creating response for Request ID: a1c59b43-e181-4306-916c-28b0968b4f2f
+2019-06-21 16:43:43.215  INFO 13756 --- [ForkJoinPool.commonPool-worker-1] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Request ID: d616e615-fb30-492c-844f-160bd350ac60 Taxi Id: ea28af9f-0cc5-4165-abb1-74398af0b24a totalCost: 3983.025358058728
+2019-06-21 16:43:43.215  INFO 13756 --- [ForkJoinPool.commonPool-worker-2] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Request ID: d425731e-1774-463d-96a0-299b5cb44609 Taxi Id: ea28af9f-0cc5-4165-abb1-74398af0b24a totalCost: 3983.02712811351
+2019-06-21 16:43:43.215  INFO 13756 --- [ForkJoinPool.commonPool-worker-3] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Request ID: 3e4aa323-3286-4be3-aaa6-c9c9f30c8d82 Taxi Id: ea28af9f-0cc5-4165-abb1-74398af0b24a distance: 3983.0277181316596
+2019-06-21 16:43:43.216  INFO 13756 --- [ForkJoinPool.commonPool-worker-3] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Request ID: 3e4aa323-3286-4be3-aaa6-c9c9f30c8d82 Taxi Id: ea28af9f-0cc5-4165-abb1-74398af0b24a totalCost: 3983.0277181316596
+2019-06-21 16:43:43.216  INFO 13756 --- [ForkJoinPool.commonPool-worker-1] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : calculateTime: 0.0995756339514682
+2019-06-21 16:43:43.216  INFO 13756 --- [ForkJoinPool.commonPool-worker-4] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : calculateTime: 2.0683580955574178E-8
+2019-06-21 16:43:43.216  INFO 13756 --- [ForkJoinPool.commonPool-worker-3] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : calculateTime: 0.0995756929532915
+2019-06-21 16:43:43.216  INFO 13756 --- [ForkJoinPool.commonPool-worker-4] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Request ID: a1c59b43-e181-4306-916c-28b0968b4f2f Taxi Id: ea28af9f-0cc5-4165-abb1-74398af0b24a PickTimeInMinutes: 0
+2019-06-21 16:43:43.216  INFO 13756 --- [ForkJoinPool.commonPool-worker-1] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Taxi Response Computed: com.miamioh.ridesharing.app.data.entity.TaxiResponse@321f5bfa
+2019-06-21 16:43:43.216  INFO 13756 --- [ForkJoinPool.commonPool-worker-3] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Taxi Response Computed: com.miamioh.ridesharing.app.data.entity.TaxiResponse@6ef20b4a
+2019-06-21 16:43:43.216  INFO 13756 --- [ForkJoinPool.commonPool-worker-4] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Request ID: a1c59b43-e181-4306-916c-28b0968b4f2f Taxi Id: ea28af9f-0cc5-4165-abb1-74398af0b24a distance: 3983.0265380954443
+2019-06-21 16:43:43.215  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.a.k.c.RideSharingRequestConsumer   : Recieved Ride Sharing Request: com.miamioh.ridesharing.app.request.RideSharingRequest@418bd831
+2019-06-21 16:43:43.216  INFO 13756 --- [ForkJoinPool.commonPool-worker-4] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Request ID: a1c59b43-e181-4306-916c-28b0968b4f2f Taxi Id: ea28af9f-0cc5-4165-abb1-74398af0b24a totalCost: 3983.0265380954443
+2019-06-21 16:43:43.216  INFO 13756 --- [ForkJoinPool.commonPool-worker-2] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : calculateTime: 0.09957567820283775
+2019-06-21 16:43:43.216  INFO 13756 --- [ForkJoinPool.commonPool-worker-4] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : calculateTime: 0.09957566345238611
+2019-06-21 16:43:43.216  INFO 13756 --- [ForkJoinPool.commonPool-worker-2] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Taxi Response Computed: com.miamioh.ridesharing.app.data.entity.TaxiResponse@6c35e778
+2019-06-21 16:43:43.216  INFO 13756 --- [ForkJoinPool.commonPool-worker-4] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Taxi Response Computed: com.miamioh.ridesharing.app.data.entity.TaxiResponse@277fc3d4
+2019-06-21 16:43:43.217  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: bab011dc-eb41-4c89-b6ad-49cd834cd879 Total Number of near by Taxis fetched: 1
+2019-06-21 16:43:43.217  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: bab011dc-eb41-4c89-b6ad-49cd834cd879 List of near by Taxis fetched: [com.miamioh.ridesharing.app.entity.Taxi@43e884e7]
+2019-06-21 16:43:43.218  INFO 13756 --- [ForkJoinPool.commonPool-worker-5] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Inside PSO Taxi Scheduler Utility RequestId: bab011dc-eb41-4c89-b6ad-49cd834cd879
+2019-06-21 16:43:43.218  INFO 13756 --- [ForkJoinPool.commonPool-worker-5] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : No of passengers : 0 PSO is not called
+2019-06-21 16:43:43.218  INFO 13756 --- [ForkJoinPool.commonPool-worker-5] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Creating response for Request ID: bab011dc-eb41-4c89-b6ad-49cd834cd879
+2019-06-21 16:43:43.218  INFO 13756 --- [ForkJoinPool.commonPool-worker-5] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : calculateTime: 0.0
+2019-06-21 16:43:43.219  INFO 13756 --- [ForkJoinPool.commonPool-worker-5] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Request ID: bab011dc-eb41-4c89-b6ad-49cd834cd879 Taxi Id: ea28af9f-0cc5-4165-abb1-74398af0b24a PickTimeInMinutes: 0
+2019-06-21 16:43:43.219  INFO 13756 --- [ForkJoinPool.commonPool-worker-5] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Request ID: bab011dc-eb41-4c89-b6ad-49cd834cd879 Taxi Id: ea28af9f-0cc5-4165-abb1-74398af0b24a distance: 3983.0259480766244
+2019-06-21 16:43:43.219  INFO 13756 --- [ForkJoinPool.commonPool-worker-5] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Request ID: bab011dc-eb41-4c89-b6ad-49cd834cd879 Taxi Id: ea28af9f-0cc5-4165-abb1-74398af0b24a totalCost: 3983.0259480766244
+2019-06-21 16:43:43.219  INFO 13756 --- [ForkJoinPool.commonPool-worker-5] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : calculateTime: 0.09957564870191561
+2019-06-21 16:43:43.219  INFO 13756 --- [ForkJoinPool.commonPool-worker-5] c.m.r.a.u.h.ScheduleTaxiEventsHelper     : Taxi Response Computed: com.miamioh.ridesharing.app.data.entity.TaxiResponse@15f45bdc
+2019-06-21 16:44:13.208  INFO 13756 --- [http-nio-8000-exec-3] c.m.r.a.c.TaxiResponseController         : Inside Get Taxi Response Controller
+2019-06-21 16:44:13.208  INFO 13756 --- [http-nio-8000-exec-7] c.m.r.a.c.TaxiResponseController         : Inside Get Taxi Response Controller
+2019-06-21 16:44:13.208  INFO 13756 --- [http-nio-8000-exec-4] c.m.r.a.c.TaxiResponseController         : Inside Get Taxi Response Controller
+2019-06-21 16:44:13.208  INFO 13756 --- [http-nio-8000-exec-6] c.m.r.a.c.TaxiResponseController         : Inside Get Taxi Response Controller
+2019-06-21 16:44:13.208  INFO 13756 --- [http-nio-8000-exec-5] c.m.r.a.c.TaxiResponseController         : Inside Get Taxi Response Controller
+2019-06-21 16:44:13.233  INFO 13756 --- [http-nio-8000-exec-3] c.m.r.a.c.TaxiResponseController         : Total No. Of Responses: 1
+2019-06-21 16:44:13.233  INFO 13756 --- [http-nio-8000-exec-4] c.m.r.a.c.TaxiResponseController         : Total No. Of Responses: 1
+2019-06-21 16:44:13.233  INFO 13756 --- [http-nio-8000-exec-6] c.m.r.a.c.TaxiResponseController         : Total No. Of Responses: 1
+2019-06-21 16:44:13.233  INFO 13756 --- [http-nio-8000-exec-5] c.m.r.a.c.TaxiResponseController         : Total No. Of Responses: 1
+2019-06-21 16:44:13.233  INFO 13756 --- [http-nio-8000-exec-7] c.m.r.a.c.TaxiResponseController         : Total No. Of Responses: 1
+2019-06-21 16:55:53.742  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.a.k.c.RideSharingRequestConsumer   : Recieved Ride Sharing Request: com.miamioh.ridesharing.app.request.RideSharingRequest@d48b14f
+2019-06-21 16:55:53.743  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: 7e17065d-72f3-462c-9679-e8feaa239f15 Total Number of near by Taxis fetched: 1
+2019-06-21 16:55:53.743  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: 7e17065d-72f3-462c-9679-e8feaa239f15 List of near by Taxis fetched: [com.miamioh.ridesharing.app.entity.Taxi@43e884e7]
+2019-06-21 16:55:53.744  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : TaxiId: ea28af9f-0cc5-4165-abb1-74398af0b24a does not have capacity.
+2019-06-21 16:55:53.748  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.a.k.c.RideSharingRequestConsumer   : Recieved Ride Sharing Request: com.miamioh.ridesharing.app.request.RideSharingRequest@7ab4650c
+2019-06-21 16:55:53.749  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: 310c9ce4-5428-4e48-aa1b-df253d87497f Total Number of near by Taxis fetched: 1
+2019-06-21 16:55:53.749  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: 310c9ce4-5428-4e48-aa1b-df253d87497f List of near by Taxis fetched: [com.miamioh.ridesharing.app.entity.Taxi@43e884e7]
+2019-06-21 16:55:53.749  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : TaxiId: ea28af9f-0cc5-4165-abb1-74398af0b24a does not have capacity.
+2019-06-21 16:55:53.749  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.a.k.c.RideSharingRequestConsumer   : Recieved Ride Sharing Request: com.miamioh.ridesharing.app.request.RideSharingRequest@4f08195e
+2019-06-21 16:55:53.750  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: e8c15277-c0a5-4040-ab66-4d16a3131e99 Total Number of near by Taxis fetched: 1
+2019-06-21 16:55:53.750  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: e8c15277-c0a5-4040-ab66-4d16a3131e99 List of near by Taxis fetched: [com.miamioh.ridesharing.app.entity.Taxi@43e884e7]
+2019-06-21 16:55:53.750  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : TaxiId: ea28af9f-0cc5-4165-abb1-74398af0b24a does not have capacity.
+2019-06-21 16:55:53.753  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.a.k.c.RideSharingRequestConsumer   : Recieved Ride Sharing Request: com.miamioh.ridesharing.app.request.RideSharingRequest@71d54475
+2019-06-21 16:55:53.754  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: aeb2d553-cf57-4364-96f3-fda05dea886a Total Number of near by Taxis fetched: 1
+2019-06-21 16:55:53.754  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: aeb2d553-cf57-4364-96f3-fda05dea886a List of near by Taxis fetched: [com.miamioh.ridesharing.app.entity.Taxi@43e884e7]
+2019-06-21 16:55:53.754  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : TaxiId: ea28af9f-0cc5-4165-abb1-74398af0b24a does not have capacity.
+2019-06-21 16:55:53.754  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.a.k.c.RideSharingRequestConsumer   : Recieved Ride Sharing Request: com.miamioh.ridesharing.app.request.RideSharingRequest@2e5ef94f
+2019-06-21 16:55:53.754  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: ccf3a50b-c91d-4de1-a567-887f49208e96 Total Number of near by Taxis fetched: 1
+2019-06-21 16:55:53.754  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : RequestId: ccf3a50b-c91d-4de1-a567-887f49208e96 List of near by Taxis fetched: [com.miamioh.ridesharing.app.entity.Taxi@43e884e7]
+2019-06-21 16:55:53.754  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] c.m.r.app.utilities.helper.TaxiUtility   : TaxiId: ea28af9f-0cc5-4165-abb1-74398af0b24a does not have capacity.
+2019-06-21 16:56:23.743  INFO 13756 --- [http-nio-8000-exec-8] c.m.r.a.c.TaxiResponseController         : Inside Get Taxi Response Controller
+2019-06-21 16:56:23.743  INFO 13756 --- [http-nio-8000-exec-9] c.m.r.a.c.TaxiResponseController         : Inside Get Taxi Response Controller
+2019-06-21 16:56:23.743  INFO 13756 --- [http-nio-8000-exec-1] c.m.r.a.c.TaxiResponseController         : Inside Get Taxi Response Controller
+2019-06-21 16:56:23.743  INFO 13756 --- [http-nio-8000-exec-2] c.m.r.a.c.TaxiResponseController         : Inside Get Taxi Response Controller
+2019-06-21 16:56:23.743  INFO 13756 --- [http-nio-8000-exec-10] c.m.r.a.c.TaxiResponseController         : Inside Get Taxi Response Controller
+2019-06-21 16:56:23.744  INFO 13756 --- [http-nio-8000-exec-8] c.m.r.a.c.TaxiResponseController         : Total No. Of Responses: 0
+2019-06-21 16:56:23.744  INFO 13756 --- [http-nio-8000-exec-9] c.m.r.a.c.TaxiResponseController         : Total No. Of Responses: 0
+2019-06-21 16:56:23.744  INFO 13756 --- [http-nio-8000-exec-10] c.m.r.a.c.TaxiResponseController         : Total No. Of Responses: 0
+2019-06-21 16:56:23.744  INFO 13756 --- [http-nio-8000-exec-2] c.m.r.a.c.TaxiResponseController         : Total No. Of Responses: 0
+2019-06-21 16:56:23.745  INFO 13756 --- [http-nio-8000-exec-1] c.m.r.a.c.TaxiResponseController         : Total No. Of Responses: 0
+2019-06-21 18:15:43.721  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
+2019-06-21 18:15:43.721  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
+2019-06-21 18:15:43.731  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] essageListenerContainer$ListenerConsumer : Consumer stopped
+2019-06-21 18:15:43.735  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] essageListenerContainer$ListenerConsumer : Consumer stopped
+2019-06-21 18:15:43.750  INFO 13756 --- [Thread-5] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-06-21 18:15:43.904  INFO 13756 --- [restartedMain] .m.r.a.DistributedRideSharingApplication : Starting DistributedRideSharingApplication on cec-ben214-03 with PID 13756 (/home/silwals/Documents/code/DistributedRideSharing/target/classes started by silwals in /home/silwals/Documents/code/DistributedRideSharing)
+2019-06-21 18:15:43.904  INFO 13756 --- [restartedMain] .m.r.a.DistributedRideSharingApplication : No active profile set, falling back to default profiles: default
+2019-06-21 18:15:44.069  INFO 13756 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-06-21 18:15:44.069  INFO 13756 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-21 18:15:44.076  INFO 13756 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7ms. Found 2 repository interfaces.
+2019-06-21 18:15:44.156  INFO 13756 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.kafka.annotation.KafkaBootstrapConfiguration' of type [org.springframework.kafka.annotation.KafkaBootstrapConfiguration$$EnhancerBySpringCGLIB$$d95e708d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-21 18:15:44.211  INFO 13756 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8000 (http)
+2019-06-21 18:15:44.213  INFO 13756 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-06-21 18:15:44.213  INFO 13756 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-06-21 18:15:44.218  INFO 13756 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-06-21 18:15:44.218  INFO 13756 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 312 ms
+2019-06-21 18:15:44.289  INFO 13756 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-06-21 18:15:44.356  INFO 13756 --- [restartedMain] c.m.r.a.c.p.KafkaConsumerConfigParams    : Bootstrap servers for the kafka consumer app are:localhost:9092
+2019-06-21 18:15:44.357  INFO 13756 --- [restartedMain] c.m.r.a.c.p.KafkaConsumerConfigParams    : AutoOffset Reset Config for the kafka consumer app is:earliest
+2019-06-21 18:15:44.357  INFO 13756 --- [restartedMain] c.m.r.a.c.p.KafkaConsumerConfigParams    : clientId for the kafka consumer app is:taxi-region-21
+2019-06-21 18:15:44.407  INFO 13756 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-21 18:15:44.503  INFO 13756 --- [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = taxi-region-21
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2019-06-21 18:15:44.506  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version : 2.0.1
+2019-06-21 18:15:44.506  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId : fa14705e51bd2ce5
+2019-06-21 18:15:44.509  INFO 13756 --- [restartedMain] org.apache.kafka.clients.Metadata        : Cluster ID: tCkSJUjmSl2fVIBEg1JoMg
+2019-06-21 18:15:44.512  INFO 13756 --- [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = taxi-region-21
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2019-06-21 18:15:44.515  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version : 2.0.1
+2019-06-21 18:15:44.516  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId : fa14705e51bd2ce5
+2019-06-21 18:15:44.516  INFO 13756 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
+2019-06-21 18:15:44.517  INFO 13756 --- [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = taxi-region-21
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2019-06-21 18:15:44.520  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version : 2.0.1
+2019-06-21 18:15:44.521  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId : fa14705e51bd2ce5
+2019-06-21 18:15:44.523  INFO 13756 --- [restartedMain] org.apache.kafka.clients.Metadata        : Cluster ID: tCkSJUjmSl2fVIBEg1JoMg
+2019-06-21 18:15:44.519  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.Metadata        : Cluster ID: tCkSJUjmSl2fVIBEg1JoMg
+2019-06-21 18:15:44.524  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-6, groupId=taxi-region-21] Discovered group coordinator cec-ben214-03:9092 (id: 2147483647 rack: null)
+2019-06-21 18:15:44.526  INFO 13756 --- [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = taxi-region-21
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2019-06-21 18:15:44.529  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version : 2.0.1
+2019-06-21 18:15:44.529  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId : fa14705e51bd2ce5
+2019-06-21 18:15:44.529  INFO 13756 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
+2019-06-21 18:15:44.532  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-6, groupId=taxi-region-21] Revoking previously assigned partitions []
+2019-06-21 18:15:44.533  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions revoked: []
+2019-06-21 18:15:44.533  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-6, groupId=taxi-region-21] (Re-)joining group
+2019-06-21 18:15:44.536  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] org.apache.kafka.clients.Metadata        : Cluster ID: tCkSJUjmSl2fVIBEg1JoMg
+2019-06-21 18:15:44.537  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-8, groupId=taxi-region-21] Discovered group coordinator cec-ben214-03:9092 (id: 2147483647 rack: null)
+2019-06-21 18:15:44.540  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-6, groupId=taxi-region-21] Successfully joined group with generation 4
+2019-06-21 18:15:44.541  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-6, groupId=taxi-region-21] Setting newly assigned partitions [register-taxi-request-9-0]
+2019-06-21 18:15:44.544  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions assigned: [register-taxi-request-9-0]
+2019-06-21 18:15:44.553  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-8, groupId=taxi-region-21] Revoking previously assigned partitions []
+2019-06-21 18:15:44.553  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions revoked: []
+2019-06-21 18:15:44.553  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-8, groupId=taxi-region-21] (Re-)joining group
+2019-06-21 18:15:44.573  INFO 13756 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8000 (http) with context path ''
+2019-06-21 18:15:44.574  INFO 13756 --- [restartedMain] .m.r.a.DistributedRideSharingApplication : Started DistributedRideSharingApplication in 0.695 seconds (JVM running for 6236.997)
+2019-06-21 18:15:44.576  INFO 13756 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2019-06-21 18:15:47.544  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-6, groupId=taxi-region-21] Attempt to heartbeat failed since group is rebalancing
+2019-06-21 18:15:47.544  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-6, groupId=taxi-region-21] Revoking previously assigned partitions [register-taxi-request-9-0]
+2019-06-21 18:15:47.545  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions revoked: [register-taxi-request-9-0]
+2019-06-21 18:15:47.545  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-6, groupId=taxi-region-21] (Re-)joining group
+2019-06-21 18:15:47.568  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-6, groupId=taxi-region-21] Successfully joined group with generation 5
+2019-06-21 18:15:47.568  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-8, groupId=taxi-region-21] Successfully joined group with generation 5
+2019-06-21 18:15:47.568  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-6, groupId=taxi-region-21] Setting newly assigned partitions [register-taxi-request-9-0]
+2019-06-21 18:15:47.569  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-8, groupId=taxi-region-21] Setting newly assigned partitions [ride-sharing-requests-5-0]
+2019-06-21 18:15:47.573  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions assigned: [register-taxi-request-9-0]
+2019-06-21 18:15:47.574  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions assigned: [ride-sharing-requests-5-0]
+2019-06-21 18:22:38.710  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
+2019-06-21 18:22:38.711  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
+2019-06-21 18:22:38.715  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] essageListenerContainer$ListenerConsumer : Consumer stopped
+2019-06-21 18:22:38.719  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] essageListenerContainer$ListenerConsumer : Consumer stopped
+2019-06-21 18:22:38.738  INFO 13756 --- [Thread-10] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-06-21 18:22:38.876  INFO 13756 --- [restartedMain] .m.r.a.DistributedRideSharingApplication : Starting DistributedRideSharingApplication on cec-ben214-03 with PID 13756 (/home/silwals/Documents/code/DistributedRideSharing/target/classes started by silwals in /home/silwals/Documents/code/DistributedRideSharing)
+2019-06-21 18:22:38.877  INFO 13756 --- [restartedMain] .m.r.a.DistributedRideSharingApplication : No active profile set, falling back to default profiles: default
+2019-06-21 18:22:38.981  INFO 13756 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-06-21 18:22:38.981  INFO 13756 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-21 18:22:38.986  INFO 13756 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5ms. Found 2 repository interfaces.
+2019-06-21 18:22:39.038  INFO 13756 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.kafka.annotation.KafkaBootstrapConfiguration' of type [org.springframework.kafka.annotation.KafkaBootstrapConfiguration$$EnhancerBySpringCGLIB$$d95e708d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-21 18:22:39.084  INFO 13756 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8000 (http)
+2019-06-21 18:22:39.085  INFO 13756 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-06-21 18:22:39.086  INFO 13756 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-06-21 18:22:39.090  INFO 13756 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-06-21 18:22:39.090  INFO 13756 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 211 ms
+2019-06-21 18:22:39.131  INFO 13756 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-06-21 18:22:39.175  INFO 13756 --- [restartedMain] c.m.r.a.c.p.KafkaConsumerConfigParams    : Bootstrap servers for the kafka consumer app are:localhost:9092
+2019-06-21 18:22:39.176  INFO 13756 --- [restartedMain] c.m.r.a.c.p.KafkaConsumerConfigParams    : AutoOffset Reset Config for the kafka consumer app is:earliest
+2019-06-21 18:22:39.176  INFO 13756 --- [restartedMain] c.m.r.a.c.p.KafkaConsumerConfigParams    : clientId for the kafka consumer app is:taxi-region-21
+2019-06-21 18:22:39.204  INFO 13756 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-21 18:22:39.262  INFO 13756 --- [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = taxi-region-21
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2019-06-21 18:22:39.264  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version : 2.0.1
+2019-06-21 18:22:39.264  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId : fa14705e51bd2ce5
+2019-06-21 18:22:39.266  INFO 13756 --- [restartedMain] org.apache.kafka.clients.Metadata        : Cluster ID: tCkSJUjmSl2fVIBEg1JoMg
+2019-06-21 18:22:39.268  INFO 13756 --- [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = taxi-region-21
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2019-06-21 18:22:39.269  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version : 2.0.1
+2019-06-21 18:22:39.269  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId : fa14705e51bd2ce5
+2019-06-21 18:22:39.270  INFO 13756 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
+2019-06-21 18:22:39.270  INFO 13756 --- [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = taxi-region-21
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2019-06-21 18:22:39.274  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version : 2.0.1
+2019-06-21 18:22:39.274  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.Metadata        : Cluster ID: tCkSJUjmSl2fVIBEg1JoMg
+2019-06-21 18:22:39.275  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-10, groupId=taxi-region-21] Discovered group coordinator cec-ben214-03:9092 (id: 2147483647 rack: null)
+2019-06-21 18:22:39.277  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-10, groupId=taxi-region-21] Revoking previously assigned partitions []
+2019-06-21 18:22:39.274  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId : fa14705e51bd2ce5
+2019-06-21 18:22:39.277  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions revoked: []
+2019-06-21 18:22:39.277  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-10, groupId=taxi-region-21] (Re-)joining group
+2019-06-21 18:22:39.279  INFO 13756 --- [restartedMain] org.apache.kafka.clients.Metadata        : Cluster ID: tCkSJUjmSl2fVIBEg1JoMg
+2019-06-21 18:22:39.280  INFO 13756 --- [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = taxi-region-21
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2019-06-21 18:22:39.281  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-10, groupId=taxi-region-21] Successfully joined group with generation 7
+2019-06-21 18:22:39.281  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-10, groupId=taxi-region-21] Setting newly assigned partitions [register-taxi-request-9-0]
+2019-06-21 18:22:39.283  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version : 2.0.1
+2019-06-21 18:22:39.283  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId : fa14705e51bd2ce5
+2019-06-21 18:22:39.283  INFO 13756 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
+2019-06-21 18:22:39.284  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions assigned: [register-taxi-request-9-0]
+2019-06-21 18:22:39.287  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] org.apache.kafka.clients.Metadata        : Cluster ID: tCkSJUjmSl2fVIBEg1JoMg
+2019-06-21 18:22:39.288  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-12, groupId=taxi-region-21] Discovered group coordinator cec-ben214-03:9092 (id: 2147483647 rack: null)
+2019-06-21 18:22:39.292  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-12, groupId=taxi-region-21] Revoking previously assigned partitions []
+2019-06-21 18:22:39.293  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions revoked: []
+2019-06-21 18:22:39.293  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-12, groupId=taxi-region-21] (Re-)joining group
+2019-06-21 18:22:39.298  INFO 13756 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8000 (http) with context path ''
+2019-06-21 18:22:39.298  INFO 13756 --- [restartedMain] .m.r.a.DistributedRideSharingApplication : Started DistributedRideSharingApplication in 0.439 seconds (JVM running for 6651.722)
+2019-06-21 18:22:39.300  INFO 13756 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2019-06-21 18:22:42.283  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-10, groupId=taxi-region-21] Attempt to heartbeat failed since group is rebalancing
+2019-06-21 18:22:42.283  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-10, groupId=taxi-region-21] Revoking previously assigned partitions [register-taxi-request-9-0]
+2019-06-21 18:22:42.283  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions revoked: [register-taxi-request-9-0]
+2019-06-21 18:22:42.283  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-10, groupId=taxi-region-21] (Re-)joining group
+2019-06-21 18:22:42.295  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-12, groupId=taxi-region-21] Successfully joined group with generation 8
+2019-06-21 18:22:42.295  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-10, groupId=taxi-region-21] Successfully joined group with generation 8
+2019-06-21 18:22:42.295  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-12, groupId=taxi-region-21] Setting newly assigned partitions [ride-sharing-requests-5-0]
+2019-06-21 18:22:42.296  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-10, groupId=taxi-region-21] Setting newly assigned partitions [register-taxi-request-9-0]
+2019-06-21 18:22:42.298  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions assigned: [ride-sharing-requests-5-0]
+2019-06-21 18:22:42.299  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions assigned: [register-taxi-request-9-0]
+2019-06-21 18:27:55.297  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
+2019-06-21 18:27:55.297  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
+2019-06-21 18:27:55.302  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] essageListenerContainer$ListenerConsumer : Consumer stopped
+2019-06-21 18:27:55.303  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] essageListenerContainer$ListenerConsumer : Consumer stopped
+2019-06-21 18:27:55.308  INFO 13756 --- [Thread-16] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-06-21 18:27:55.458  INFO 13756 --- [restartedMain] .m.r.a.DistributedRideSharingApplication : Starting DistributedRideSharingApplication on cec-ben214-03 with PID 13756 (/home/silwals/Documents/code/DistributedRideSharing/target/classes started by silwals in /home/silwals/Documents/code/DistributedRideSharing)
+2019-06-21 18:27:55.458  INFO 13756 --- [restartedMain] .m.r.a.DistributedRideSharingApplication : No active profile set, falling back to default profiles: default
+2019-06-21 18:27:55.574  INFO 13756 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-06-21 18:27:55.574  INFO 13756 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-21 18:27:55.579  INFO 13756 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5ms. Found 2 repository interfaces.
+2019-06-21 18:27:55.631  INFO 13756 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.kafka.annotation.KafkaBootstrapConfiguration' of type [org.springframework.kafka.annotation.KafkaBootstrapConfiguration$$EnhancerBySpringCGLIB$$d95e708d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-21 18:27:55.680  INFO 13756 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8000 (http)
+2019-06-21 18:27:55.681  INFO 13756 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-06-21 18:27:55.681  INFO 13756 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-06-21 18:27:55.685  INFO 13756 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-06-21 18:27:55.685  INFO 13756 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 225 ms
+2019-06-21 18:27:55.731  INFO 13756 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-06-21 18:27:55.795  INFO 13756 --- [restartedMain] c.m.r.a.c.p.KafkaConsumerConfigParams    : Bootstrap servers for the kafka consumer app are:localhost:9092
+2019-06-21 18:27:55.795  INFO 13756 --- [restartedMain] c.m.r.a.c.p.KafkaConsumerConfigParams    : AutoOffset Reset Config for the kafka consumer app is:earliest
+2019-06-21 18:27:55.795  INFO 13756 --- [restartedMain] c.m.r.a.c.p.KafkaConsumerConfigParams    : clientId for the kafka consumer app is:taxi-region-21
+2019-06-21 18:27:55.833  INFO 13756 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-21 18:27:55.893  INFO 13756 --- [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = taxi-region-21
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2019-06-21 18:27:55.896  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version : 2.0.1
+2019-06-21 18:27:55.896  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId : fa14705e51bd2ce5
+2019-06-21 18:27:55.897  INFO 13756 --- [restartedMain] org.apache.kafka.clients.Metadata        : Cluster ID: tCkSJUjmSl2fVIBEg1JoMg
+2019-06-21 18:27:55.899  INFO 13756 --- [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = taxi-region-21
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2019-06-21 18:27:55.902  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version : 2.0.1
+2019-06-21 18:27:55.902  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId : fa14705e51bd2ce5
+2019-06-21 18:27:55.902  INFO 13756 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
+2019-06-21 18:27:55.903  INFO 13756 --- [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = taxi-region-21
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2019-06-21 18:27:55.904  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.Metadata        : Cluster ID: tCkSJUjmSl2fVIBEg1JoMg
+2019-06-21 18:27:55.905  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-14, groupId=taxi-region-21] Discovered group coordinator cec-ben214-03:9092 (id: 2147483647 rack: null)
+2019-06-21 18:27:55.906  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-14, groupId=taxi-region-21] Revoking previously assigned partitions []
+2019-06-21 18:27:55.906  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions revoked: []
+2019-06-21 18:27:55.906  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version : 2.0.1
+2019-06-21 18:27:55.906  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-14, groupId=taxi-region-21] (Re-)joining group
+2019-06-21 18:27:55.906  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId : fa14705e51bd2ce5
+2019-06-21 18:27:55.908  INFO 13756 --- [restartedMain] org.apache.kafka.clients.Metadata        : Cluster ID: tCkSJUjmSl2fVIBEg1JoMg
+2019-06-21 18:27:55.910  INFO 13756 --- [restartedMain] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.id = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = taxi-region-21
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2019-06-21 18:27:55.910  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-14, groupId=taxi-region-21] Successfully joined group with generation 10
+2019-06-21 18:27:55.911  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-14, groupId=taxi-region-21] Setting newly assigned partitions [register-taxi-request-9-0]
+2019-06-21 18:27:55.912  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka version : 2.0.1
+2019-06-21 18:27:55.912  INFO 13756 --- [restartedMain] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId : fa14705e51bd2ce5
+2019-06-21 18:27:55.912  INFO 13756 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
+2019-06-21 18:27:55.913  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions assigned: [register-taxi-request-9-0]
+2019-06-21 18:27:55.918  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] org.apache.kafka.clients.Metadata        : Cluster ID: tCkSJUjmSl2fVIBEg1JoMg
+2019-06-21 18:27:55.920  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-16, groupId=taxi-region-21] Discovered group coordinator cec-ben214-03:9092 (id: 2147483647 rack: null)
+2019-06-21 18:27:55.920  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-16, groupId=taxi-region-21] Revoking previously assigned partitions []
+2019-06-21 18:27:55.921  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions revoked: []
+2019-06-21 18:27:55.921  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-16, groupId=taxi-region-21] (Re-)joining group
+2019-06-21 18:27:55.933  INFO 13756 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8000 (http) with context path ''
+2019-06-21 18:27:55.934  INFO 13756 --- [restartedMain] .m.r.a.DistributedRideSharingApplication : Started DistributedRideSharingApplication in 0.492 seconds (JVM running for 6968.357)
+2019-06-21 18:27:55.935  INFO 13756 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2019-06-21 18:27:58.911  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-14, groupId=taxi-region-21] Attempt to heartbeat failed since group is rebalancing
+2019-06-21 18:27:58.912  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-14, groupId=taxi-region-21] Revoking previously assigned partitions [register-taxi-request-9-0]
+2019-06-21 18:27:58.912  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions revoked: [register-taxi-request-9-0]
+2019-06-21 18:27:58.912  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-14, groupId=taxi-region-21] (Re-)joining group
+2019-06-21 18:27:58.926  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-16, groupId=taxi-region-21] Successfully joined group with generation 11
+2019-06-21 18:27:58.927  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-16, groupId=taxi-region-21] Setting newly assigned partitions [ride-sharing-requests-5-0]
+2019-06-21 18:27:58.927  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-14, groupId=taxi-region-21] Successfully joined group with generation 11
+2019-06-21 18:27:58.929  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-14, groupId=taxi-region-21] Setting newly assigned partitions [register-taxi-request-9-0]
+2019-06-21 18:27:58.932  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions assigned: [ride-sharing-requests-5-0]
+2019-06-21 18:27:58.935  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : partitions assigned: [register-taxi-request-9-0]
+2019-06-21 18:43:38.908  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
+2019-06-21 18:43:38.908  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
+2019-06-21 18:43:38.912  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] essageListenerContainer$ListenerConsumer : Consumer stopped
+2019-06-21 18:43:38.914  INFO 13756 --- [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] essageListenerContainer$ListenerConsumer : Consumer stopped
+2019-06-21 18:43:38.921  INFO 13756 --- [Thread-27] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
