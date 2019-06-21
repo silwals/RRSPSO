@@ -26,6 +26,7 @@ public class PSO {
 
 	public static List<Event> events = new ArrayList<Event>();
 	private static Map<Event, Event> dropToPickupVertexMap = new HashMap<>();
+	private static int tempCount=0;
 
 	private static int noOfNodes;
 
@@ -194,7 +195,7 @@ public class PSO {
      */
     public static void distance(double lat1, double lat2, double lon1,
 			double lon2) {
-		log.info("Inside distance calculator using HEREAPI ");
+		log.info("Inside distance calculator using HEREAPI "+ tempCount++);
 		double distance=0.0;
 		String uri = AppConstants.URI+ "?app_id=" + AppConstants.APP_ID + "&app_code="
 				+ AppConstants.APP_CODE + "&waypoint0=geo!" + lat1 + "," + lon1 + 
@@ -234,6 +235,7 @@ public class PSO {
 	 */
 	
 	public static double distance(double lat1, double lat2, double lon1, double lon2, double el1, double el2) {
+		log.info("Inside distance calculator using HEREAPI "+ tempCount++);
 
 		final int R = 6371; // Radius of the earth
 
@@ -384,7 +386,7 @@ public class PSO {
 		}
 	} // Particle
 
-	public static void main_1(String[] args) {
+	public static void main(String[] args) {
 		List<Event> events = new ArrayList<>();
 	/*	Event ev1 = new Event();
 		ev1.setRequestId(UUID.randomUUID().toString());
@@ -511,6 +513,7 @@ public class PSO {
 			psoNodes.add(node);
 			System.out.println(node.getRequestId() +":"+node.isPickup());
 		}
+		System.out.println("Final count of tempcount"+tempCount);
 		return;
 	}
 	public List<Event> start() {
