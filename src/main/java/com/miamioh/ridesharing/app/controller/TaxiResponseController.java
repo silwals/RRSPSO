@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotBlank;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.miamioh.ridesharing.app.constants.AppConstants;
 import com.miamioh.ridesharing.app.data.dao.TaxiResponseDao;
+import com.miamioh.ridesharing.app.data.entity.TaxiOnWait;
 import com.miamioh.ridesharing.app.data.entity.TaxiResponse;
 import com.miamioh.ridesharing.app.data.entity.TempScheduledEventList;
 import com.miamioh.ridesharing.app.data.repository.TaxiOnWaitRepository;
@@ -107,7 +109,13 @@ public class TaxiResponseController {
 		ack.setResponseId(rideSharingConfirmation.getResponseId());
 		Taxi taxi = taxiUtility.getTaxiInstance(rideSharingConfirmation.getTaxiId());
 		int noOfPassenger = taxi.getNoOfPassenger().get();//add synchronized block
-		if(rideSharingConfirmation.isConfirmed() && noOfPassenger < AppConstants.TAXI_MAX_CAPACITY && taxiOnWaitRepository.findById(rideSharingConfirmation.getTaxiId())==null)  {
+		Optional<TaxiOnWait> taxiOnWait = taxiOnWaitRepository.findById(rideSharingConfirmation.getTaxiId());
+		int waitCount =0;
+		if(taxiOnWait.isPresent()) {
+			waitCount=taxiOnWait.get().getCount();
+			
+		}
+		if(rideSharingConfirmation.isConfirmed() && noOfPassenger < AppConstants.TAXI_MAX_CAPACITY && waitCount==1)  {
 			
 			 Optional<TempScheduledEventList> findById = tempScheduledEventListRepository.findById(rideSharingConfirmation.getResponseId());
 			 findById.ifPresent(a -> {
@@ -117,7 +125,7 @@ public class TaxiResponseController {
 				 zSetOperations.add(rideSharingConfirmation.getTaxiId(), a.getDropEvent(), a.getDropEvent().getIndex());
 				 taxi.getNoOfPassenger().incrementAndGet();
 				 //Since the remaining set of events will be invalidated
-				 tempScheduledEventListRepository.deleteAll();
+				 // tempScheduledEventListRepository.deleteAll();
 			 });
 			 
 			 if(findById.isPresent()) {

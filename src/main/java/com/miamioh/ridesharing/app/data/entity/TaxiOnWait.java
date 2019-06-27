@@ -1,7 +1,5 @@
 package com.miamioh.ridesharing.app.data.entity;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
@@ -13,5 +11,5 @@ import lombok.Setter;
 public class TaxiOnWait {
 	@Id
 	private String taxiId;
-	private AtomicInteger count;
+	private int count;
 }
