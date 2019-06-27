@@ -11,6 +11,7 @@ public class Taxi {
 	private String model;
 	private AtomicInteger noOfPassenger;
 	
+	
 	/*@Autowired
 	private TaxiUtility taxiUtility;*/
 	
@@ -91,6 +92,7 @@ public class Taxi {
 	public Taxi() {
 		
 	}
+
 	
 	/*public void addEventSchedule(RideSharingRequest request) {
 		boolean isValid = validateRequest(request);

@@ -23,6 +23,9 @@ import org.springframework.data.redis.core.GeoOperations;
 import org.springframework.stereotype.Component;
 
 import com.miamioh.ridesharing.app.constants.AppConstants;
+import com.miamioh.ridesharing.app.data.entity.TaxiOnWait;
+import com.miamioh.ridesharing.app.data.repository.TaxiOnWaitRepository;
+import com.miamioh.ridesharing.app.data.repository.TempScheduledEventListRepository;
 import com.miamioh.ridesharing.app.entity.Taxi;
 import com.miamioh.ridesharing.app.request.RideSharingRequest;
 
@@ -34,6 +37,12 @@ public class TaxiUtility {
 	
 	@Resource(name="redisTemplate")
 	private GeoOperations<String, String> geoOperations;
+	
+	@Autowired
+	private TempScheduledEventListRepository tempScheduledEventListRepository;
+	
+	@Autowired
+	private TaxiOnWaitRepository taxiOnWaitRepository;
 	
 	@Autowired
 	private ScheduleTaxiEventsHelper scheduleTaxiEventsHelper;
@@ -66,12 +75,18 @@ public class TaxiUtility {
 		}
 		log.info("RequestId: "+request.getRequestID()+" Total Number of near by Taxis fetched: "+nearByTaxiList.size());
 		log.info("RequestId: "+request.getRequestID()+" List of near by Taxis fetched: "+nearByTaxiList);
+		
+	
 		for(Taxi taxi: nearByTaxiList) {
 			//taxi.addEventSchedule(request);
 			/* before scheduling events, check if taxi has available space
 			 * process only if taxi has capacity to add more requests
 			 */
-			if(taxi.getNoOfPassenger().get()<= AppConstants.TAXI_MAX_CAPACITY && request.getSeatsNeeded()< (AppConstants.TAXI_MAX_CAPACITY -taxi.getNoOfPassenger().get())) {				
+			TaxiOnWait taxiOnWait = new TaxiOnWait();
+			if(taxi.getNoOfPassenger().get()<= AppConstants.TAXI_MAX_CAPACITY && request.getSeatsNeeded()< (AppConstants.TAXI_MAX_CAPACITY -taxi.getNoOfPassenger().get())) {
+				taxiOnWait.setTaxiId(taxi.getTaxiId());
+				taxiOnWaitRepository.save(taxiOnWait);// what if it does not get saved , or it saves multiple times check ?
+				log.info("Creating TaxiOnWait object for  :" +taxi.getTaxiId());
 			CompletableFuture.runAsync(() -> scheduleTaxiEventsHelper.findPSO(taxi, request));
 			}else {
 				log.info("TaxiId: "+taxi.getTaxiId() +" does not have capacity.");	

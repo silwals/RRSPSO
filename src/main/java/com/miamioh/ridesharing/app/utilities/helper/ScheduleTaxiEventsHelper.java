@@ -19,7 +19,6 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.miamioh.ridesharing.app.constants.AppConstants;
-import com.miamioh.ridesharing.app.constants.VertexTypeEnum;
 import com.miamioh.ridesharing.app.data.dao.TaxiResponseDao;
 import com.miamioh.ridesharing.app.data.entity.TaxiResponse;
 import com.miamioh.ridesharing.app.data.entity.TempScheduledEventList;
@@ -27,7 +26,6 @@ import com.miamioh.ridesharing.app.data.repository.TempScheduledEventListReposit
 import com.miamioh.ridesharing.app.entity.Event;
 import com.miamioh.ridesharing.app.entity.Taxi;
 import com.miamioh.ridesharing.app.request.RideSharingRequest;
-import com.miamioh.ridesharing.app.utilities.helper.PSO.Particle;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -24,6 +24,7 @@ import com.miamioh.ridesharing.app.constants.AppConstants;
 import com.miamioh.ridesharing.app.data.dao.TaxiResponseDao;
 import com.miamioh.ridesharing.app.data.entity.TaxiResponse;
 import com.miamioh.ridesharing.app.data.entity.TempScheduledEventList;
+import com.miamioh.ridesharing.app.data.repository.TaxiOnWaitRepository;
 import com.miamioh.ridesharing.app.data.repository.TempScheduledEventListRepository;
 import com.miamioh.ridesharing.app.entity.Event;
 import com.miamioh.ridesharing.app.entity.Taxi;
@@ -45,6 +46,9 @@ public class TaxiResponseController {
 	
 	@Autowired
 	private TempScheduledEventListRepository tempScheduledEventListRepository;
+	
+	@Autowired
+	private TaxiOnWaitRepository taxiOnWaitRepository;
 	
 	private static final Logger log = LoggerFactory.getLogger(TaxiResponseController.class);
 	/*@Resource(name="redisTemplate")
@@ -103,7 +107,7 @@ public class TaxiResponseController {
 		ack.setResponseId(rideSharingConfirmation.getResponseId());
 		Taxi taxi = taxiUtility.getTaxiInstance(rideSharingConfirmation.getTaxiId());
 		int noOfPassenger = taxi.getNoOfPassenger().get();//add synchronized block
-		if(rideSharingConfirmation.isConfirmed() && noOfPassenger < AppConstants.TAXI_MAX_CAPACITY) {
+		if(rideSharingConfirmation.isConfirmed() && noOfPassenger < AppConstants.TAXI_MAX_CAPACITY && taxiOnWaitRepository.findById(rideSharingConfirmation.getTaxiId())==null)  {
 			
 			 Optional<TempScheduledEventList> findById = tempScheduledEventListRepository.findById(rideSharingConfirmation.getResponseId());
 			 findById.ifPresent(a -> {
@@ -112,6 +116,8 @@ public class TaxiResponseController {
 				 zSetOperations.add(rideSharingConfirmation.getTaxiId(), a.getPickUpEvent(), a.getPickUpEvent().getIndex());
 				 zSetOperations.add(rideSharingConfirmation.getTaxiId(), a.getDropEvent(), a.getDropEvent().getIndex());
 				 taxi.getNoOfPassenger().incrementAndGet();
+				 //Since the remaining set of events will be invalidated
+				 tempScheduledEventListRepository.deleteAll();
 			 });
 			 
 			 if(findById.isPresent()) {
@@ -119,6 +125,7 @@ public class TaxiResponseController {
 				 ack.setTaxi(taxiUtility.getTaxiInstance(rideSharingConfirmation.getTaxiId()));
 				 ack.setMessage("Booking Confirmed"); 
 			 }else {
+				 // Incase the 
 				 ack.setAckStatus(false);
 				 ack.setMessage("Timed Out");
 			 }
