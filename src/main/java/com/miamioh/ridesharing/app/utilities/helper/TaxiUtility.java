@@ -3,6 +3,7 @@ package com.miamioh.ridesharing.app.utilities.helper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Component;
 
 import com.miamioh.ridesharing.app.constants.AppConstants;
 import com.miamioh.ridesharing.app.data.entity.TaxiOnWait;
+import com.miamioh.ridesharing.app.data.entity.TempScheduledEventList;
 import com.miamioh.ridesharing.app.data.repository.TaxiOnWaitRepository;
 import com.miamioh.ridesharing.app.data.repository.TempScheduledEventListRepository;
 import com.miamioh.ridesharing.app.entity.Taxi;
@@ -82,11 +84,18 @@ public class TaxiUtility {
 			/* before scheduling events, check if taxi has available space
 			 * process only if taxi has capacity to add more requests
 			 */
-			TaxiOnWait taxiOnWait = new TaxiOnWait();
+			 Optional<TaxiOnWait> findById = taxiOnWaitRepository.findById(taxi.getTaxiId());
+			
 			if(taxi.getNoOfPassenger().get()<= AppConstants.TAXI_MAX_CAPACITY && request.getSeatsNeeded()< (AppConstants.TAXI_MAX_CAPACITY -taxi.getNoOfPassenger().get())) {
-				taxiOnWait.setTaxiId(taxi.getTaxiId());
-				taxiOnWaitRepository.save(taxiOnWait);// what if it does not get saved , or it saves multiple times check ?
-				log.info("Creating TaxiOnWait object for  :" +taxi.getTaxiId());
+				findById.ifPresent(a->a.getCount().incrementAndGet());
+				 if(!findById.isPresent()) {
+					 TaxiOnWait taxiOnWait = new TaxiOnWait();
+					 taxiOnWait.setTaxiId(taxi.getTaxiId());
+					 taxiOnWait.getCount().incrementAndGet();
+					 taxiOnWaitRepository.save(taxiOnWait);// what if it does not get saved , or it saves multiple times check ?
+					 log.info("Creating TaxiOnWait object for  :" +taxi.getTaxiId()); 
+				 }
+				
 			CompletableFuture.runAsync(() -> scheduleTaxiEventsHelper.findPSO(taxi, request));
 			}else {
 				log.info("TaxiId: "+taxi.getTaxiId() +" does not have capacity.");	
