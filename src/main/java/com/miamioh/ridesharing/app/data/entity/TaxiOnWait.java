@@ -11,5 +11,5 @@ import lombok.Setter;
 public class TaxiOnWait {
 	@Id
 	private String taxiId;
-	private int count;
+	//private int count;
 }

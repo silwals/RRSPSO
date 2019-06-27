@@ -63,9 +63,10 @@ public class TaxiUtility {
 		}
 	}
 	
-	/*public boolean deregisterTaxi(Taxi taxi) {
+	public boolean deregisterTaxi(Taxi taxi) {
+		log.info("DeRegistering Taxi with taxiId: "+taxi.getTaxiId());
 			return taxiHub.remove(taxi.getTaxiId(), taxi);
-	}*/
+	}
 	
 	public void shareRide(RideSharingRequest request) {
 		Circle circle = new Circle(new Point(request.getPickUpEvent().getLongitude(), request.getPickUpEvent().getLatitude()), new Distance(AppConstants.FIND_TAXI_WITHIN_RADIUS_IN_KMS, DistanceUnit.KILOMETERS));
@@ -87,14 +88,14 @@ public class TaxiUtility {
 			 Optional<TaxiOnWait> findById = taxiOnWaitRepository.findById(taxi.getTaxiId());
 			
 			if(taxi.getNoOfPassenger().get()<= AppConstants.TAXI_MAX_CAPACITY && request.getSeatsNeeded()< (AppConstants.TAXI_MAX_CAPACITY -taxi.getNoOfPassenger().get())) {
-				findById.ifPresent(a->a.setCount(a.getCount()+1));
-				 if(!findById.isPresent()) {
-					 TaxiOnWait taxiOnWait = new TaxiOnWait();
-					 taxiOnWait.setTaxiId(taxi.getTaxiId());
-					 taxiOnWait.setCount(1);
-					 taxiOnWaitRepository.save(taxiOnWait);// what if it does not get saved , or it saves multiple times check ?
-					 log.info("Creating TaxiOnWait object for  :" +taxi.getTaxiId()); 
-				 }
+				/*
+				 * findById.ifPresent(a->a.setCount(a.getCount()+1)); if(!findById.isPresent())
+				 * { TaxiOnWait taxiOnWait = new TaxiOnWait();
+				 * taxiOnWait.setTaxiId(taxi.getTaxiId()); taxiOnWait.setCount(1);
+				 * taxiOnWaitRepository.save(taxiOnWait);// what if it does not get saved , or
+				 * it saves multiple times check ? log.info("Creating TaxiOnWait object for  :"
+				 * +taxi.getTaxiId()); }
+				 */
 				
 			CompletableFuture.runAsync(() -> scheduleTaxiEventsHelper.findPSO(taxi, request));
 			}else {

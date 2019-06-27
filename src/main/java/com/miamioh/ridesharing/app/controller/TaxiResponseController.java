@@ -111,10 +111,10 @@ public class TaxiResponseController {
 		int noOfPassenger = taxi.getNoOfPassenger().get();//add synchronized block
 		Optional<TaxiOnWait> taxiOnWait = taxiOnWaitRepository.findById(rideSharingConfirmation.getTaxiId());
 		int waitCount =0;
-		if(taxiOnWait.isPresent()) {
+		/*if(taxiOnWait.isPresent()) {
 			waitCount=taxiOnWait.get().getCount();
 			
-		}
+		}*/
 		if(rideSharingConfirmation.isConfirmed() && noOfPassenger < AppConstants.TAXI_MAX_CAPACITY && waitCount==1)  {
 			
 			 Optional<TempScheduledEventList> findById = tempScheduledEventListRepository.findById(rideSharingConfirmation.getResponseId());
