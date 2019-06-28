@@ -25,7 +25,6 @@ import org.springframework.stereotype.Component;
 
 import com.miamioh.ridesharing.app.constants.AppConstants;
 import com.miamioh.ridesharing.app.data.entity.TaxiOnWait;
-import com.miamioh.ridesharing.app.data.entity.TempScheduledEventList;
 import com.miamioh.ridesharing.app.data.repository.TaxiOnWaitRepository;
 import com.miamioh.ridesharing.app.data.repository.TempScheduledEventListRepository;
 import com.miamioh.ridesharing.app.entity.Taxi;

@@ -47,10 +47,22 @@ public class KafkaConsumerConfig {
 		factory.getContainerProperties().setAckMode(AckMode.MANUAL);
 		return factory;
 	}
+	@Bean("deregisterTaxi")
+	@DependsOn("kafkaConsumerConfigParams")
+	public ConcurrentKafkaListenerContainerFactory<String, Taxi> batchFactoryDeRegisterTaxi(KafkaConsumerConfigParams kafkaConsumerConfigParams) {
+		System.out.println("batchFactoryDeRegisterTaxi");
+		ConcurrentKafkaListenerContainerFactory<String, Taxi> factory = new ConcurrentKafkaListenerContainerFactory<>();
+		JsonDeserializer<Taxi> ds = new JsonDeserializer<>(Taxi.class);
+		//ds.addTrustedPackages("*");
+		DefaultKafkaConsumerFactory<String, Taxi> consumerFactory = new DefaultKafkaConsumerFactory<>(kafkaConsumerConfigParams.getConsumerConfigWithJsonDeserializer(), 
+				new StringDeserializer(), ds);
+		
+		factory.setConsumerFactory(consumerFactory);
+		factory.setConcurrency(1);
+		factory.setBatchListener(false);
+		factory.getContainerProperties().setAckMode(AckMode.MANUAL);
+		return factory;
+	}
 	
-	/*@Bean
-    public StringJsonMessageConverter jsonConverter() {
-        return new StringJsonMessageConverter();
-    }*/
 	
 }

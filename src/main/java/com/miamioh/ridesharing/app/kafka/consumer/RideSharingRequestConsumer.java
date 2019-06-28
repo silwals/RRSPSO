@@ -33,11 +33,11 @@ public class RideSharingRequestConsumer {
 		ack.acknowledge();
 	}
 	
-/*	@KafkaListener(topics="${kafka.taxi.topic}", containerFactory="deregisterTaxi")
+	@KafkaListener(topics="${kafka.taxi.next.topic}", containerFactory="deregisterTaxi")
 	public void deRegisterTaxi(Taxi taxi, Acknowledgment ack){
 		log.info("Recieved De Register Taxi Request: "+taxi);
 		taxiUtility.deregisterTaxi(taxi);
 		ack.acknowledge();
 	}
-	*/
+	
 }

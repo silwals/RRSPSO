@@ -115,7 +115,7 @@ public class TaxiResponseController {
 			waitCount=taxiOnWait.get().getCount();
 			
 		}*/
-		if(rideSharingConfirmation.isConfirmed() && noOfPassenger < AppConstants.TAXI_MAX_CAPACITY && waitCount==1)  {
+		if(rideSharingConfirmation.isConfirmed() && noOfPassenger < AppConstants.TAXI_MAX_CAPACITY)  {
 			
 			 Optional<TempScheduledEventList> findById = tempScheduledEventListRepository.findById(rideSharingConfirmation.getResponseId());
 			 findById.ifPresent(a -> {
