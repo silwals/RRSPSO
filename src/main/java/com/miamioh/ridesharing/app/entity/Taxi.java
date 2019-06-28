@@ -5,27 +5,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Taxi {
 	
 	private String taxiId;
-	private String taxiNumber;
 	private double longitude;
 	private double latitude;
-	private String model;
 	private AtomicInteger noOfPassenger;
-	
-	
-	/*@Autowired
-	private TaxiUtility taxiUtility;*/
-	
-	/*@Setter(value=AccessLevel.NONE)
-	private List<Event> tempScheduledEventList;
-	
-	@Setter(value=AccessLevel.NONE)
-	private List<Event> finalScheduledEventList;*/
-	
-	/*@Setter(value=AccessLevel.NONE)
-	@Getter(value=AccessLevel.NONE)
-	private Graph routeGraph;*/
-	
-	
 	
 	public String getTaxiId() {
 		return taxiId;
@@ -33,14 +15,6 @@ public class Taxi {
 
 	public void setTaxiId(String taxiId) {
 		this.taxiId = taxiId;
-	}
-
-	public String getTaxiNumber() {
-		return taxiNumber;
-	}
-
-	public void setTaxiNumber(String taxiNumber) {
-		this.taxiNumber = taxiNumber;
 	}
 
 	public double getLongitude() {
@@ -58,15 +32,6 @@ public class Taxi {
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
-
-	public String getModel() {
-		return model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
-	}
-
 	public AtomicInteger getNoOfPassenger() {
 		return noOfPassenger;
 	}
@@ -77,7 +42,6 @@ public class Taxi {
 
 	public Taxi(String taxiNumber, double longitude, double latitude) {
 		super();
-		this.taxiNumber = taxiNumber;
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.noOfPassenger= new AtomicInteger(0);

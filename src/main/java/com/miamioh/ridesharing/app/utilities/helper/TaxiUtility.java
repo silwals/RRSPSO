@@ -86,7 +86,8 @@ public class TaxiUtility {
 			 */
 			 Optional<TaxiOnWait> findById = taxiOnWaitRepository.findById(taxi.getTaxiId());
 			
-			if(taxi.getNoOfPassenger().get()<= AppConstants.TAXI_MAX_CAPACITY && request.getSeatsNeeded()< (AppConstants.TAXI_MAX_CAPACITY -taxi.getNoOfPassenger().get())) {
+			if(request.getSeatsNeeded()<= (AppConstants.TAXI_MAX_CAPACITY -taxi.getNoOfPassenger().get())) {
+				log.info("Seats Needed: "+request.getSeatsNeeded()+" Seats available in the taxi :"+ (AppConstants.TAXI_MAX_CAPACITY -taxi.getNoOfPassenger().get()));
 				/*
 				 * findById.ifPresent(a->a.setCount(a.getCount()+1)); if(!findById.isPresent())
 				 * { TaxiOnWait taxiOnWait = new TaxiOnWait();
