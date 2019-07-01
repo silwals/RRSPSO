@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,52 +53,34 @@ public class ScheduleTaxiEventsHelper {
 	public void findPSO(Taxi taxi, RideSharingRequest request) {
 		log.info("Inside PSO Taxi Scheduler Utility RequestId: "+request.getRequestID());
 		Set<Event> events = zSetOperations.range(taxi.getTaxiId(), 0, -1);
-		TaxiResponse response =null;
-		//Handle the edge case
-		if (taxi.getNoOfPassenger().get() == 0 || events.size()==0) {
-			log.info("No of passengers : "+taxi.getNoOfPassenger().get()+ " PSO is not called");
-			// taxi is empty and it can take in the new request
-			List<Event> singleRequest=new ArrayList<>();
-			singleRequest.add(0, request.getPickUpEvent());
-			singleRequest.add(1,request.getDropOffEvent());
-			response = createResponseObject(request, taxi);
-			Event taxiNode = new Event();
-			taxiNode.setLatitude(taxi.getLatitude());
-			taxiNode.setLongitude(taxi.getLongitude());
-			double totalWeightInMst=getDistance(taxiNode, singleRequest.get(0));
-				
-			request.getPickUpEvent().setIndex(0);
-			response.setPickUpIndex(0);
-			response.setPickTimeInMinutes(calculateTime(totalWeightInMst));
-			log.info("Request ID: "+request.getRequestID()+" Taxi Id: "+taxi.getTaxiId()+" PickTimeInMinutes: "+response.getPickTimeInMinutes());
+		TaxiResponse response = new TaxiResponse();
+		List<Event> upcomingEvents=null;
+		try {
 			
-			double distance = distance(request.getPickUpEvent().getLatitude(), request.getDropOffEvent().getLatitude(), request.getPickUpEvent().getLongitude(), request.getDropOffEvent().getLongitude(), 0.0, 0.0);
-			log.info("Request ID: "+request.getRequestID()+" Taxi Id: "+taxi.getTaxiId()+" distance: "+distance);
-			
-			response.setDistanceInKms(distance/1000.0);
-			response.setCost(calculateCost(distance));
-			log.info("Request ID: "+request.getRequestID()+" Taxi Id: "+taxi.getTaxiId()+" totalCost: "+response.getCost());
-			
-			request.getDropOffEvent().setIndex(1);
-			response.setDropIndex(1);
-			response.setTimeToDestinationInMinutes(calculateTime(distance));			
-			
-		}else {
-			log.info("No of passengers : "+taxi.getNoOfPassenger().get()+ "PSO is called");
-			/*
-			 * If taxi is not empty and has scheduled events in it's list
-			 */
-			events.add(request.getPickUpEvent());
-			events.add(request.getDropOffEvent());
-			PSO psoImpl = new PSO(new ArrayList<>(events));
+		// upcomingEvents 
+			if( events.size()!=0) {
+		 List<Event> filteredEvents = events.stream().filter(i -> !(i.isCompleted())).collect(Collectors.toList());
+		 upcomingEvents.addAll(filteredEvents);
+			}
+		}catch(Exception e) {
+			log.info("it is failing here :"+ e);
+		}
+		log.info("upcomingEvents :" +upcomingEvents.size());
+		if(upcomingEvents !=null && !upcomingEvents.isEmpty()) {
+			upcomingEvents.add(request.getPickUpEvent());
+			upcomingEvents.add(request.getDropOffEvent());
+			PSOImpl psoImpl = new PSOImpl(upcomingEvents);
 			List<Event> psoEvents = psoImpl.start();
 			
 			log.info("Request ID: "+request.getRequestID()+" PSO Shortest Path: "+psoEvents);
-	 		
-	 		response = createResponseObject(request, taxi);
-	 		log.info("Taxi Response Object Computed:"+response);
-	 		log.info("Response needs the time to pick the request from the taxi");
-	 		int overallPickIndex = 0;
+			
+			String responseId = UUID.randomUUID().toString();
+			response.setResponseId(responseId);
+			response.setRequestId(request.getRequestID());
+			response.setTaxiId(taxi.getTaxiId());
+			response.setAvailableSeats(AppConstants.TAXI_MAX_CAPACITY-taxi.getNoOfPassenger().get()); // increment no Of passenger in each taxi confirmation
+			
+			int overallPickIndex = 0;
 			int pickUpindex = 0;
 			double totalWeightInMst = 0.0;
 			Event taxiNode = new Event();
@@ -151,13 +134,41 @@ public class ScheduleTaxiEventsHelper {
 			log.info("Request ID: "+request.getRequestID()+" Taxi Id: "+taxi.getTaxiId()+" totalWeightToDestInMst: "+totalWeightToDestInMst);
 			
 			request.getDropOffEvent().setIndex(overallDropIndex);
-			response.setPickUpIndex(dropOffindex);
+			response.setDropIndex(dropOffindex);
 			response.setTimeToDestinationInMinutes(calculateTime(totalWeightToDestInMst));
-		    }
+		}else {
+			//write code to directly compute route without PSO
+			log.info("No of passengers : "+taxi.getNoOfPassenger().get()+ " PSO is not called");
+			// taxi is empty and it can take in the new request
+			List<Event> singleRequest=new ArrayList<>();
+			singleRequest.add(0, request.getPickUpEvent());
+			singleRequest.add(1,request.getDropOffEvent());
+			response = createResponseObject(request, taxi);
+			Event taxiNode = new Event();
+			taxiNode.setLatitude(taxi.getLatitude());
+			taxiNode.setLongitude(taxi.getLongitude());
+			double totalWeightInMst=getDistance(taxiNode, singleRequest.get(0));
+				
+			request.getPickUpEvent().setIndex(0);
+			response.setPickUpIndex(0);
+			response.setPickTimeInMinutes(calculateTime(totalWeightInMst));
+			log.info("Request ID: "+request.getRequestID()+" Taxi Id: "+taxi.getTaxiId()+" PickTimeInMinutes: "+response.getPickTimeInMinutes());
+			
+			double distance = distance(request.getPickUpEvent().getLatitude(), request.getDropOffEvent().getLatitude(), request.getPickUpEvent().getLongitude(), request.getDropOffEvent().getLongitude(), 0.0, 0.0);
+			log.info("Request ID: "+request.getRequestID()+" Taxi Id: "+taxi.getTaxiId()+" distance: "+distance);
+			
+			response.setDistanceInKms(distance/1000.0);
+			response.setCost(calculateCost(distance));
+			log.info("Request ID: "+request.getRequestID()+" Taxi Id: "+taxi.getTaxiId()+" totalCost: "+response.getCost());
+			
+			request.getDropOffEvent().setIndex(1);
+			response.setDropIndex(1);
+			response.setTimeToDestinationInMinutes(calculateTime(distance));			
+			
+		}
 			log.info("Taxi Response Computed: "+response);
 			taxiResponseDao.save(response);
 			saveEventsInTempScheduledEventList(request, response.getResponseId(), taxi.getTaxiId());
-			return ;
 
 		}
 		

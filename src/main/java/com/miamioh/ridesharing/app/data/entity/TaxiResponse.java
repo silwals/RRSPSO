@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
-@RedisHash("TaxiResponse")
+@RedisHash(value = "TaxiResponse")// removed TTL as it was getting deleted too fast
 public class TaxiResponse implements Serializable {
 	
 	@Id

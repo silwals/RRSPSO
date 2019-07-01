@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.miamioh.ridesharing.app.constants.AppConstants;
 import com.miamioh.ridesharing.app.entity.Event;
 
-public class PSO {
+public class PSOImpl {
 	private static final Logger log = LoggerFactory.getLogger(ScheduleTaxiEventsHelper.class);
 	private static final int PARTICLE_COUNT = 100;
 	private static final int V_MAX = 4; // Maximum velocity change allowed.
@@ -30,7 +30,7 @@ public class PSO {
 
 	private static int noOfNodes;
 
-	public PSO(List<Event> eventsPassed) {
+	public PSOImpl(List<Event> eventsPassed) {
 		log.info("Inside PSO constructor :"+eventsPassed );
 		events = eventsPassed;
 		noOfNodes = events.size();
@@ -502,7 +502,7 @@ public class PSO {
 		
 		
 		log.info("Size of events"+events.size());
-		PSO psoImpl = new PSO(events);
+		PSOImpl psoImpl = new PSOImpl(events);
 		psoImpl.initializeMap();
 		psoImpl.PSOAlgorithm();
 		Particle printBestSolution = psoImpl.printBestSolution();

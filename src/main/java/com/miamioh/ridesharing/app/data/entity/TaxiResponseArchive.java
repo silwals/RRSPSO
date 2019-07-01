@@ -5,11 +5,14 @@ import org.springframework.data.redis.core.RedisHash;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-@RedisHash(value="TaxisOnWait", timeToLive=300L)
-@Getter @Setter
-public class TaxiOnWait {
+@Getter @Setter @ToString
+@RedisHash(value = "TaxiResponseArchive")
+public class TaxiResponseArchive {
+	
 	@Id
-	private String taxiId;
-	//private int count;
+	private String responseId;
+	private TaxiResponse taxiResponse;
+
 }

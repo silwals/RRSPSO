@@ -3,13 +3,11 @@ package com.miamioh.ridesharing.app.utilities.helper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
-
+import java.util.stream.Collectors;
 import javax.annotation.Resource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +22,6 @@ import org.springframework.data.redis.core.GeoOperations;
 import org.springframework.stereotype.Component;
 
 import com.miamioh.ridesharing.app.constants.AppConstants;
-import com.miamioh.ridesharing.app.data.entity.TaxiOnWait;
-import com.miamioh.ridesharing.app.data.repository.TaxiOnWaitRepository;
 import com.miamioh.ridesharing.app.data.repository.TempScheduledEventListRepository;
 import com.miamioh.ridesharing.app.entity.Taxi;
 import com.miamioh.ridesharing.app.request.RideSharingRequest;
@@ -42,8 +38,6 @@ public class TaxiUtility {
 	@Autowired
 	private TempScheduledEventListRepository tempScheduledEventListRepository;
 	
-	@Autowired
-	private TaxiOnWaitRepository taxiOnWaitRepository;
 	
 	@Autowired
 	private ScheduleTaxiEventsHelper scheduleTaxiEventsHelper;
@@ -62,9 +56,9 @@ public class TaxiUtility {
 		}
 	}
 	
-	public boolean deregisterTaxi(Taxi taxi) {
+	public void deregisterTaxi(Taxi taxi) {
 		log.info("DeRegistering Taxi with taxiId: "+taxi.getTaxiId());
-			return taxiHub.remove(taxi.getTaxiId(), taxi);
+			 taxiHub.remove(taxi.getTaxiId());
 	}
 	
 	public void shareRide(RideSharingRequest request) {
@@ -76,32 +70,15 @@ public class TaxiUtility {
 			nearByTaxiList.add(taxiHub.get((geoResult.getContent().getName())));
 		}
 		log.info("RequestId: "+request.getRequestID()+" Total Number of near by Taxis fetched: "+nearByTaxiList.size());
-		log.info("RequestId: "+request.getRequestID()+" List of near by Taxis fetched: "+nearByTaxiList);
-		
-	
-		for(Taxi taxi: nearByTaxiList) {
+        if(nearByTaxiList.size()>0) {
+		List<Taxi> avalableNearByTaxiList = nearByTaxiList.stream().filter(i -> i.getNoOfPassenger().get() < AppConstants.TAXI_MAX_CAPACITY ).collect(Collectors.toList());
+		for(Taxi taxi: avalableNearByTaxiList) {
 			//taxi.addEventSchedule(request);
-			/* before scheduling events, check if taxi has available space
-			 * process only if taxi has capacity to add more requests
-			 */
-			 Optional<TaxiOnWait> findById = taxiOnWaitRepository.findById(taxi.getTaxiId());
-			
-			if(request.getSeatsNeeded()<= (AppConstants.TAXI_MAX_CAPACITY -taxi.getNoOfPassenger().get())) {
-				log.info("Seats Needed: "+request.getSeatsNeeded()+" Seats available in the taxi :"+ (AppConstants.TAXI_MAX_CAPACITY -taxi.getNoOfPassenger().get()));
-				/*
-				 * findById.ifPresent(a->a.setCount(a.getCount()+1)); if(!findById.isPresent())
-				 * { TaxiOnWait taxiOnWait = new TaxiOnWait();
-				 * taxiOnWait.setTaxiId(taxi.getTaxiId()); taxiOnWait.setCount(1);
-				 * taxiOnWaitRepository.save(taxiOnWait);// what if it does not get saved , or
-				 * it saves multiple times check ? log.info("Creating TaxiOnWait object for  :"
-				 * +taxi.getTaxiId()); }
-				 */
-				
 			CompletableFuture.runAsync(() -> scheduleTaxiEventsHelper.findPSO(taxi, request));
-			}else {
-				log.info("TaxiId: "+taxi.getTaxiId() +" does not have capacity.");	
-			}
 		}
+        }
+	
+		
 	}
 	
 	public Taxi getTaxiInstance(String taxiId) {
