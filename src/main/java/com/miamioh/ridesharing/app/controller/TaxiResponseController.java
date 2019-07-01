@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 import javax.annotation.Resource;
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.validation.constraints.NotBlank;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.SetOperations;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,8 +51,8 @@ public class TaxiResponseController {
 	@Autowired
 	private TempScheduledEventListRepository tempScheduledEventListRepository;
 	
-	/*@Resource(name="redisTemplate")
-	private SetOperations<String, Event> setOperations;*/
+	@Resource(name="redisTemplate")
+	private SetOperations<String, String> setOperations;
 	
 	@Resource(name="redisTemplate")
 	private ZSetOperations<String, Event> zSetOperations;
@@ -73,32 +73,36 @@ public class TaxiResponseController {
 		List<TaxiResponse> taxiResponsesList = new ArrayList<>();
 		taxiResponses.forEach(a -> taxiResponsesList.add(a));
 		log.info("Total No. Of Responses: "+taxiResponsesList.size());
-		if(taxiResponsesList.size()==0) {
+		if(taxiResponsesList != null && !taxiResponsesList.isEmpty()) {
+			Collections.sort(taxiResponsesList, ((a,b)->{
+				int result = Double.valueOf(a.getCost()).compareTo(Double.valueOf(b.getCost()));
+				if(result==0) {
+					result = Long.valueOf(a.getPickTimeInMinutes()).compareTo(Long.valueOf(b.getPickTimeInMinutes()));
+				}
+				if(result == 0) {
+					result = Long.valueOf(a.getTimeToDestinationInMinutes()).compareTo(Long.valueOf(b.getTimeToDestinationInMinutes()));
+				}
+				if(result == 0) {
+					result = Integer.valueOf(a.getAvailableSeats()).compareTo(Integer.valueOf(b.getAvailableSeats()));
+				}
+				return result;
+			}));
+			TaxiResponse response = taxiResponsesList.get(0);
+			CompletableFuture.runAsync(() ->{
+				TaxiResponseArchive archiveResponse = new TaxiResponseArchive();
+				archiveResponse.setResponseId(response.getResponseId());
+				archiveResponse.setTaxiResponse(response);
+				taxiResponseArchiveRepository.save(archiveResponse);
+				taxiResponseDao.deleteAll(taxiResponsesList);
+				taxiResponsesList.remove(response);
+				taxiResponsesList.forEach(resp -> tempScheduledEventListRepository.deleteById(resp.getResponseId()));
+			});
+			
+			return response;
+		}else {
 			return null;
 		}
-		Collections.sort(taxiResponsesList, ((a,b)->{
-			int result = Double.valueOf(a.getCost()).compareTo(Double.valueOf(b.getCost()));
-			if(result==0) {
-				result = Long.valueOf(a.getPickTimeInMinutes()).compareTo(Long.valueOf(b.getPickTimeInMinutes()));
-			}
-			if(result == 0) {
-				result = Long.valueOf(a.getTimeToDestinationInMinutes()).compareTo(Long.valueOf(b.getTimeToDestinationInMinutes()));
-			}
-			if(result == 0) {
-				result = Integer.valueOf(a.getAvailableSeats()).compareTo(Integer.valueOf(b.getAvailableSeats()));
-			}
-			return result;
-		}));
-		log.info("taxiResponsesList size "+taxiResponsesList.size());
-		TaxiResponse response = taxiResponsesList.get(0);
-		TaxiResponseArchive archiveResponse = new TaxiResponseArchive();
-		archiveResponse.setResponseId(response.getResponseId());
-		archiveResponse.setTaxiResponse(response);
-		taxiResponseArchiveRepository.save(archiveResponse);
-		taxiResponsesList.remove(response);
-		taxiResponseDao.deleteAll(taxiResponsesList);
-		taxiResponsesList.forEach(resp -> tempScheduledEventListRepository.deleteById(resp.getResponseId()));
-		return response;
+
 	}
 	
 	@GetMapping(value="/RideSharing/Taxis", produces=MediaType.APPLICATION_JSON_VALUE)
@@ -119,27 +123,22 @@ public class TaxiResponseController {
 		Taxi taxi = taxiUtility.getTaxiInstance(rideSharingConfirmation.getTaxiId());
 		int noOfPassenger = taxi.getNoOfPassenger().get();//add synchronized block
 		if(rideSharingConfirmation.isConfirmed() && noOfPassenger < AppConstants.TAXI_MAX_CAPACITY) {
+			
 			 Optional<TempScheduledEventList> tempEvents = tempScheduledEventListRepository.findById(rideSharingConfirmation.getResponseId());
 			 tempEvents.ifPresent(a -> {
 				 zSetOperations.add(rideSharingConfirmation.getTaxiId(), a.getPickUpEvent(), a.getPickUpEvent().getIndex());
 				 zSetOperations.add(rideSharingConfirmation.getTaxiId(), a.getDropEvent(), a.getDropEvent().getIndex());
-				 log.info("tempEvents is Present: Before delete ");
-				 try {
-				 tempScheduledEventListRepository.deleteByTaxiId(a.getTaxiId());
-				 }catch(Exception e) {
-					 log.info("Catches Exception while deleting by TaxiID"+e);
-				 }
-				 log.info("tempEvents is Present: After delete ");
+				 Set<String> taxiResponseIds = setOperations.members("TaxiResponseMap:"+taxi.getTaxiId());
+				 taxiResponseIds.forEach(responseId -> tempScheduledEventListRepository.deleteById(responseId));
+				 setOperations.remove("TaxiResponseMap:"+taxi.getTaxiId(), taxiResponseIds.toArray());
 				// taxiResponseDao.delete(rideSharingConfirmation.getResponseId());// change code to delete by requestId
 				 taxi.getNoOfPassenger().incrementAndGet();
 			 });
+			 
 			 if(tempEvents.isPresent()) {
 				 ack.setAckStatus(true);
 				 ack.setTaxi(taxiUtility.getTaxiInstance(rideSharingConfirmation.getTaxiId()));
-				 ack.setMessage("Booking Confirmed");log.info("Calls ShareRide Once Again");
-					Optional<RideSharingRequestHash> rideSharingRequest = rideSharingRequestRepository.findById(rideSharingConfirmation.getRequestId());
-					rideSharingRequest.ifPresent(request -> taxiUtility.shareRide(request.getRideSharingRequest()));
-					
+				 ack.setMessage("Booking Confirmed");
 			 }else {
 				 ack.setAckStatus(false);
 				 ack.setMessage("Timed Out");
@@ -148,10 +147,12 @@ public class TaxiResponseController {
 			ack.setAckStatus(false);
 			ack.setMessage("Taxi Max capacity reached");
 		}
-		log.info("Calls ShareRide Once Again");
-	//	Optional<RideSharingRequestHash> rideSharingRequest = rideSharingRequestRepository.findById(rideSharingConfirmation.getRequestId());
-	//	rideSharingRequest.ifPresent(request -> taxiUtility.shareRide(request.getRideSharingRequest()));
-		
+		if(!ack.isAckStatus()) {
+			CompletableFuture.runAsync(() -> {
+				Optional<RideSharingRequestHash> rideSharingRequest = rideSharingRequestRepository.findById(rideSharingConfirmation.getRequestId());
+				rideSharingRequest.ifPresent(request -> taxiUtility.shareRide(request.getRideSharingRequest()));
+				});
+		}
 		return ack;
 	}
 }

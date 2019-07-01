@@ -34,11 +34,7 @@ public class TaxiUtility {
 	
 	@Resource(name="redisTemplate")
 	private GeoOperations<String, String> geoOperations;
-	
-	@Autowired
-	private TempScheduledEventListRepository tempScheduledEventListRepository;
-	
-	
+
 	@Autowired
 	private ScheduleTaxiEventsHelper scheduleTaxiEventsHelper;
 	
@@ -69,14 +65,14 @@ public class TaxiUtility {
 		for(GeoResult< GeoLocation<String>> geoResult: content) {
 			nearByTaxiList.add(taxiHub.get((geoResult.getContent().getName())));
 		}
-		log.info("RequestId: "+request.getRequestID()+" Total Number of near by Taxis fetched: "+nearByTaxiList.size());
-        if(nearByTaxiList.size()>0) {
+		
 		List<Taxi> avalableNearByTaxiList = nearByTaxiList.stream().filter(i -> i.getNoOfPassenger().get() < AppConstants.TAXI_MAX_CAPACITY ).collect(Collectors.toList());
+		log.info("RequestId: "+request.getRequestID()+" Total Number of near by Taxis fetched: "+avalableNearByTaxiList.size());
+		log.info("RequestId: "+request.getRequestID()+" List of near by Taxis fetched: "+avalableNearByTaxiList);
 		for(Taxi taxi: avalableNearByTaxiList) {
 			//taxi.addEventSchedule(request);
 			CompletableFuture.runAsync(() -> scheduleTaxiEventsHelper.findPSO(taxi, request));
 		}
-        }
 	
 		
 	}

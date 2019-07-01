@@ -23,13 +23,8 @@ public class TaxiResponseDaoImpl implements TaxiResponseDao{
 	
 	@Override
 	public void save(TaxiResponse response) {
-		try {
 		repository.save(response);
 		setOperations.add(response.getRequestId(), response.getResponseId());
-		}
-		catch(Exception e) {
-			System.out.println("Exception while saving:"+e );
-		}
 	}
 	
 	@Override
@@ -38,17 +33,19 @@ public class TaxiResponseDaoImpl implements TaxiResponseDao{
 	}
 	
 	@Override
-	public Iterable<TaxiResponse> getTaxiResponses(Collection<String> taxiResponseIds){
-		return repository.findAllById(taxiResponseIds);
-	}
-	@Override
-	public void delete(String responseId) {
-		repository.deleteById(responseId);
+	public void delete(String taxiId) {
+		repository.deleteById(taxiId);
 	}
 	
 	@Override
 	public void deleteAll(Collection<TaxiResponse> taxiResponseList) {
 		repository.deleteAll(taxiResponseList);
 	}
+	
+	@Override
+	public Iterable<TaxiResponse> getTaxiResponses(Collection<String> taxiResponseIds){
+		return repository.findAllById(taxiResponseIds);
+	}
+
 
 }

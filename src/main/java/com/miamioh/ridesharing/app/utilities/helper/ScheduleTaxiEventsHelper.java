@@ -6,13 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.SetOperations;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -39,9 +40,9 @@ public class ScheduleTaxiEventsHelper {
 
 	@Autowired
 	private TempScheduledEventListRepository tempScheduledEventListRepository;
-   
-	@Autowired
-	private RestTemplate restTemplate;
+  
+	@Resource(name="redisTemplate")
+	private SetOperations<String, String> setOperations;
 	
 	@Resource(name = "redisTemplate")
 	private ZSetOperations<String, Event> zSetOperations;
@@ -53,33 +54,35 @@ public class ScheduleTaxiEventsHelper {
 	public void findPSO(Taxi taxi, RideSharingRequest request) {
 		log.info("Inside PSO Taxi Scheduler Utility RequestId: "+request.getRequestID());
 		Set<Event> events = zSetOperations.range(taxi.getTaxiId(), 0, -1);
+		log.info("Check1"); 
+		/* 
+		 * this code throws error and also takes forever to execute
+		 * since we are not manually completed the tip anywhere in the code
+		 * comment this part for now and simple copy the items from permanent queue to temp queue
+		 */
+
+	//	List<Event> upcomingEvents = events.stream().filter(i -> !(i.isCompleted())).collect(Collectors.toList());
+		List<Event> upcomingEvents=new ArrayList<Event>(events);
+		log.info("Check2"+upcomingEvents.size()); 
 		TaxiResponse response = new TaxiResponse();
-		List<Event> upcomingEvents=null;
-		try {
-			
-		// upcomingEvents 
-			if( events.size()!=0) {
-		 List<Event> filteredEvents = events.stream().filter(i -> !(i.isCompleted())).collect(Collectors.toList());
-		 upcomingEvents.addAll(filteredEvents);
-			}
-		}catch(Exception e) {
-			log.info("it is failing here :"+ e);
-		}
-		log.info("upcomingEvents :" +upcomingEvents.size());
+		log.info("upcomingEvents: "+upcomingEvents);
 		if(upcomingEvents !=null && !upcomingEvents.isEmpty()) {
+			log.info("Check3"); 
 			upcomingEvents.add(request.getPickUpEvent());
 			upcomingEvents.add(request.getDropOffEvent());
+			log.info("Before calling PSO "+upcomingEvents.size()); 
 			PSOImpl psoImpl = new PSOImpl(upcomingEvents);
 			List<Event> psoEvents = psoImpl.start();
 			
 			log.info("Request ID: "+request.getRequestID()+" PSO Shortest Path: "+psoEvents);
 			
-			String responseId = UUID.randomUUID().toString();
+		/*	String responseId = UUID.randomUUID().toString();
 			response.setResponseId(responseId);
 			response.setRequestId(request.getRequestID());
 			response.setTaxiId(taxi.getTaxiId());
-			response.setAvailableSeats(AppConstants.TAXI_MAX_CAPACITY-taxi.getNoOfPassenger().get()); // increment no Of passenger in each taxi confirmation
-			
+			response.setAvailableSeats(AppConstants.TAXI_MAX_CAPACITY-taxi.getNoOfPassenger().get()); // increament no Of passenger in each taxi confirmation
+		*/
+			response=createResponseObject(request, taxi);
 			int overallPickIndex = 0;
 			int pickUpindex = 0;
 			double totalWeightInMst = 0.0;
@@ -136,6 +139,9 @@ public class ScheduleTaxiEventsHelper {
 			request.getDropOffEvent().setIndex(overallDropIndex);
 			response.setDropIndex(dropOffindex);
 			response.setTimeToDestinationInMinutes(calculateTime(totalWeightToDestInMst));
+			//log.info("Taxi Response Computed: "+response);
+			//taxiResponseDao.save(response);
+			//saveEventsInTempScheduledEventList(request, responseId, taxi.getTaxiId());
 		}else {
 			//write code to directly compute route without PSO
 			log.info("No of passengers : "+taxi.getNoOfPassenger().get()+ " PSO is not called");
@@ -148,9 +154,11 @@ public class ScheduleTaxiEventsHelper {
 			taxiNode.setLatitude(taxi.getLatitude());
 			taxiNode.setLongitude(taxi.getLongitude());
 			double totalWeightInMst=getDistance(taxiNode, singleRequest.get(0));
-				
-			request.getPickUpEvent().setIndex(0);
-			response.setPickUpIndex(0);
+			
+            int overallPickIndex=1;
+            int pickUpindex=1;
+			request.getPickUpEvent().setIndex(overallPickIndex);
+			response.setPickUpIndex(pickUpindex);	
 			response.setPickTimeInMinutes(calculateTime(totalWeightInMst));
 			log.info("Request ID: "+request.getRequestID()+" Taxi Id: "+taxi.getTaxiId()+" PickTimeInMinutes: "+response.getPickTimeInMinutes());
 			
@@ -161,14 +169,18 @@ public class ScheduleTaxiEventsHelper {
 			response.setCost(calculateCost(distance));
 			log.info("Request ID: "+request.getRequestID()+" Taxi Id: "+taxi.getTaxiId()+" totalCost: "+response.getCost());
 			
-			request.getDropOffEvent().setIndex(1);
-			response.setDropIndex(1);
-			response.setTimeToDestinationInMinutes(calculateTime(distance));			
+			int overallDropIndex=2;
+			int dropOffindex=2;
+			request.getDropOffEvent().setIndex(overallDropIndex);
+			response.setDropIndex(dropOffindex);
+			response.setTimeToDestinationInMinutes(calculateTime(distance));
 			
+			//Alert:: overall index is not set || index should start from 1
 		}
 			log.info("Taxi Response Computed: "+response);
 			taxiResponseDao.save(response);
 			saveEventsInTempScheduledEventList(request, response.getResponseId(), taxi.getTaxiId());
+			
 
 		}
 		
@@ -190,12 +202,14 @@ public class ScheduleTaxiEventsHelper {
 		tempScheduledEventList.setResponseId(responseId);
 		tempScheduledEventList.setTaxiId(taxiId);
 		tempScheduledEventListRepository.save(tempScheduledEventList);
+		setOperations.add("TaxiResponseMap:"+taxiId, responseId);
 	}
 
 	private static long calculateTime(double totalWeightInMst) {
 		double time = (totalWeightInMst / 1000.0) / AppConstants.AVG_SPEED_OF_TAXI_IN_KMPH;
 		log.info("calculateTime: " + time);
 		return Math.round(time) * 60;
+		
 	}
 
 	private static double calculateCost(double distance) {

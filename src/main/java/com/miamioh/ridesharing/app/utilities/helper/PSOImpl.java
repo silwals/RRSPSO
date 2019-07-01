@@ -31,23 +31,33 @@ public class PSOImpl {
 	private static int noOfNodes;
 
 	public PSOImpl(List<Event> eventsPassed) {
-		log.info("Inside PSO constructor :"+eventsPassed );
+		log.info("Inside PSO constructor :"+eventsPassed.getClass() );
 		events = eventsPassed;
 		noOfNodes = events.size();
 	}
 
 	void initializeMap() {
+		log.info("Inside initializeMap method" );
 		Map<String, List<Event>> requestEventMap = new HashMap<>();
-		for (Event event : events) {
-			if (requestEventMap.get(event.getRequestId()) != null) {
-				requestEventMap.get(event.getRequestId()).add(event);
-			} else {
-				List<Event> eventList = new ArrayList<>();
-				eventList.add(event);
-				requestEventMap.put(event.getRequestId(), eventList);
-			}
+        try{
+		for (Object obj: events) {
+			Class<?> clazz=obj.getClass();
+			log.info("Clazz"+clazz );
+			/*
+			 * if (requestEventMap.get(event.getRequestId()) != null) {
+			 * requestEventMap.get(event.getRequestId()).add(event); } else { List<Event>
+			 * eventList = new ArrayList<>(); eventList.add(event);
+			 * requestEventMap.put(event.getRequestId(), eventList); }
+			 */
 
-		}
+		
+	}
+        }catch(Exception e) {
+        	System.out.println("Trycatch");
+        	e.printStackTrace();
+        }
+		
+		log.info("Inside initializeMap method check 1" );
 		for (String requestId : requestEventMap.keySet()) {
 			List<Event> nodeList = requestEventMap.get(requestId);
 			Event p1 = null;
@@ -62,7 +72,7 @@ public class PSOImpl {
 			}
 			dropToPickupVertexMap.put(d1, p1);
 		}
-		return;
+		log.info("Inside initializeMap method check 2" );
 	}
 
 	 void PSOAlgorithm() {
@@ -386,136 +396,7 @@ public class PSOImpl {
 		}
 	} // Particle
 
-	public static void main(String[] args) {
-		List<Event> events = new ArrayList<>();
-	/*	Event ev1 = new Event();
-		ev1.setRequestId(UUID.randomUUID().toString());
-		ev1.setRequestId("101"); // kroger
-		ev1.setLatitude(39.507558);
-		ev1.setLongitude(-84.751148);
-		ev1.setPickup(true);
-
-		Event ev2 = new Event();
-		ev2.setRequestId(ev1.getRequestId());
-		ev2.setLatitude(39.510794); //Engineering building
-		ev2.setLongitude(-84.732891);
-		ev2.setPickup(false);
-
-		Event ev3 = new Event();
-		ev3.setRequestId("102");
-		ev3.setLatitude(39.506015); //Hampton Inn Oxford
-		ev3.setLongitude(-84.744711);
-		ev3.setPickup(true);
-
-		Event ev4 = new Event();
-		ev4.setRequestId(ev3.getRequestId());
-		ev4.setLatitude(39.510649);  //Miami University (Microbiology)
-		ev4.setLongitude(-84.730935);
-		ev4.setPickup(false);
-
-		Event ev5 = new Event();
-		ev5.setRequestId("103");  // William Holmes McGuffey Museum
-		ev5.setLatitude(39.507208);
-		ev5.setLongitude(-84.735907);
-		ev5.setPickup(true);
-
-		Event ev6 = new Event();
-		ev6.setRequestId(ev5.getRequestId());
-		ev6.setLatitude(39.492166);  //level 27 
-		ev6.setLongitude(-84.719996);
-		ev6.setPickup(false);
-		
-		
-		
-		Event ev7 = new Event();
-		ev7.setRequestId("104");// 303 S Patterson Ave
-		ev7.setLatitude(39.506880);
-		ev7.setLongitude(-84.730163);
-		ev7.setPickup(true);
-
-		Event ev8 = new Event();
-		ev8.setRequestId(ev7.getRequestId());
-		ev8.setLatitude(39.497070);  //Oxford cemetery
-		ev8.setLongitude(-84.729224);
-		ev8.setPickup(false);
-*/
-		Event ev1 = new Event();
-		ev1.setRequestId(UUID.randomUUID().toString());
-		ev1.setRequestId("101"); // Hilton Chicago
-		ev1.setLatitude(41.873060);
-		ev1.setLongitude(-87.624563);
-		ev1.setPickup(true);
-
-		Event ev2 = new Event();
-		ev2.setRequestId(ev1.getRequestId());
-		ev2.setLatitude(41.885609); //Chicago theatre
-		ev2.setLongitude(-87.627661);
-		ev2.setPickup(false);
-
-		Event ev3 = new Event();
-		ev3.setRequestId("102");
-		ev3.setLatitude(41.874635); //Columbia College Chicago
-		ev3.setLongitude(-87.624771);
-		ev3.setPickup(true);
-
-		Event ev4 = new Event();
-		ev4.setRequestId(ev3.getRequestId());
-		ev4.setLatitude(41.883510);  //Jay Pritzker Pavillion
-		ev4.setLongitude(-87.622001);
-		ev4.setPickup(false);
-
-		Event ev5 = new Event();
-		ev5.setRequestId("103");  // Chicago Board of Trade Building
-		ev5.setLatitude(41.878313);
-		ev5.setLongitude(-87.632259);
-		ev5.setPickup(true);
-
-		Event ev6 = new Event();
-		ev6.setRequestId(ev5.getRequestId());
-		ev6.setLatitude(41.887351);  //Swissotel Chicago
-		ev6.setLongitude(-87.619572);
-		ev6.setPickup(false);
-		
-		
-		Event ev7 = new Event();
-		ev7.setRequestId("104");// Chicago Cultural centre
-		ev7.setLatitude(41.884052);
-		ev7.setLongitude(-87.624945);
-		ev7.setPickup(true);
-		
-		
-		Event ev8 = new Event();
-		ev8.setRequestId(ev7.getRequestId());
-		ev8.setLatitude(41.894919);  //North western memorial Hospital
-		ev8.setLongitude(-87.621338);
-		ev8.setPickup(false);
-		
-
-		events.add(ev1);
-		events.add(ev2);
-		events.add(ev3);
-		events.add(ev4);
-	    events.add(ev5);
-		events.add(ev6);
-	    events.add(ev7);
-		events.add(ev8);
-		
-		
-		log.info("Size of events"+events.size());
-		PSOImpl psoImpl = new PSOImpl(events);
-		psoImpl.initializeMap();
-		psoImpl.PSOAlgorithm();
-		Particle printBestSolution = psoImpl.printBestSolution();
-		List<Event> psoNodes = new ArrayList<>();
-		log.info("Final Event Schedule after PSO");
-		for (int i : printBestSolution.getmData()) {
-			Event node = psoImpl.events.get(i);
-			psoNodes.add(node);
-			System.out.println(node.getRequestId() +":"+node.isPickup());
-		}
-		System.out.println("Final count of tempcount"+tempCount);
-		return;
-	}
+	
 	public List<Event> start() {
 		log.info("Inside PSO start() method ");
 		initializeMap();
